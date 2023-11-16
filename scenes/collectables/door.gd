@@ -1,6 +1,6 @@
 extends Node2D
 @onready var area = get_node("Area2D")
-@onready var player = get_node("../../../player")
+@onready var player = get_tree().get_current_scene().get_node("player")
 var collided = false
 
 func _ready():

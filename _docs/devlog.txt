@@ -1,43 +1,55 @@
-v0.01 -- initial release
-v0.02 -- added gun and bullets
-v0.03 -- added crates and raycasts for wallhit sound. modified tile detector code to allow for NONE behavior when airborn
+v0.01
+-initial release
+
+v0.02
+-added gun and bullets
+
+v0.03
+-added crates and raycasts for wallhit sound. modified tile detector code to allow for NONE behavior when airborn
 (currently disabled as it would remove the cool bounce mechanic--would have to re-code that somehow.) Made bullets position not tied to player.
 
-v0.04 -- 
-bugs fixed:
+v0.04
 -player can trigger area entered events when touching other objects such as the tilemap or a crates: for example lvl 2 gravity flip via crate (FIXED--this was due to a bug in the Collectable script which I deleted.)
 features added:
 -added movement for crates
--destroy crates when they hit a spike (DONE--added terrain detector to crate)
+-destroy crates when they hit a spike (added terrain detector to crate)
 -allow player to move while under a crate (maybe later... it's not a bug it's a feature now)
 
-v0.05 --
+v0.05
 -added restart game
 -added Nathan (dialogue) and gun item as pickup
 
-v0.06 --
-bugs fixed:
+v0.06
 -player can now move under crates (area2d, collision layer method.)
 -new game dialogue for nathan
 -removed old code / nodes on crate that weren't being used
 
 ========================================================================================
 
-
-
+v0.07
+-added VERSION CONTROL (GIT)
+-fixed an issue where controller input would lag/stutter the game. Removed all controller input for now.
+-animated sprite for nathan
+-parallax / game background for levels
+-updated base scene nodes and drawing order
 
 TODO:
--VERSION CONTROL (GIT)
--make nathan collideable / shootable?
--more characters / dialogue? make collidable?
+-add cutscene for falling off edge
 -sound fx for dialogue
 -background music
--parallax / game background for levels
+-velocity boost from gun bullets
+
+OTHER:
+#-fix weird single pixel layer offset for player ground collisions and crates in fullscreen -- nah, doesn't happen on itch.io
+#-make nathan collideable / shootable? -- nah, feels wrong
+#-prevent moving while dialogue? -- nah, feels wrong
+
+
 
 
 bugs to fix:
 -normalization error randomly occurs in move_and_slide
-E 0:01:31:0218   player.gd:89 @ _physics_process(): The normal Vector2 must be normalized.
+	E 0:01:31:0218   player.gd:89 @ _physics_process(): The normal Vector2 must be normalized.
   <C++ Error>    Condition "!p_normal.is_normalized()" is true. Returning: Vector2()
   <C++ Source>   core/math/vector2.cpp:165 @ slide()
   <Stack Trace>  player.gd:89 @ _physics_process()
