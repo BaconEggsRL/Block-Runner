@@ -1,3 +1,6 @@
+# project ignores
+_export/
+
 # Godot 4+ specific ignores
 .godot/
 
