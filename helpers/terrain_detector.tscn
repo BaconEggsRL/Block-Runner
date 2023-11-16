@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwg2hqd66desv"]
+
+[ext_resource type="Script" path="res://helpers/TerrainDetector.gd" id="1_p7xh6"]
+
+[node name="terrain_detector" type="Area2D"]
+script = ExtResource("1_p7xh6")
+
+[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]
+[connection signal="body_shape_exited" from="." to="." method="_on_body_shape_exited"]

@@ -1,0 +1,9 @@
+res://characters/player.tscn
+res://scenes/destroyables/crate.tscn
+res://scenes/levels/BaseLevel.tscn
+res://scenes/levels/Level_2.tscn
+res://scenes/levels/Level_1.tscn
+res://characters/NPCs/gun_guy.tscn
+res://scenes/levels/YouWin.tscn
+res://scenes/bullet.tscn
+res://scenes/items/gun.tscn

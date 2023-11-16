@@ -1,0 +1,81 @@
+~ start
+
+if Game.talked_to_nathan:
+	if Game.beat_the_game:
+		set Game.beat_the_game = false
+		set Game.gun_guy_count = 0
+		Nathan: Haven't we met before?
+		=> END
+else:
+	set Game.talked_to_nathan = true
+
+if !Game.has_gun and Game.gun_guy_count < 10:
+	
+	if Game.death_counter > 0:
+		Nathan: What, you died already?
+		if Game.get_rand() > 0.5:
+			Nathan: Dude. It's literally the first level.
+		Nathan: You'd better take this then. You know, to protect yourself.
+		set Game.has_gun = true
+		do Game.has_gun_signal.emit()
+		=> END
+	
+	else:
+		Nathan: Hello there.
+		Nathan: What is your name?
+		Nathan: ...
+		Nathan: Not much of a talker, are you?
+		Nathan: ...
+		Nathan: I guess it doesn't matter.
+		Nathan: Are you out here all alone?
+		Nathan: ...
+		Nathan: Right then. I'll take that as a yes.
+		Nathan: You'd better take this. You know, to protect yourself.
+		set Game.has_gun = true
+		do Game.has_gun_signal.emit()
+		=> END
+
+else:
+	
+	if Game.gun_guy_count < 10:
+		set Game.gun_guy_count += 1
+		if Game.gun_guy_count > 5:
+			% Nathan: Scram.
+			% Nathan: Go away.
+			% Nathan: Please stop.
+			% Nathan: You enjoying this?
+			% Nathan: ...
+		else:
+			if Game.gun_guy_count < 3:
+				% Nathan: Hello.
+				% Nathan: Good day.
+			else:
+				% Nathan: What do you want?
+				% Nathan: What is it?
+		=> END
+		
+	if Game.gun_guy_count > 10:
+		set Game.gun_guy_count += 1
+		if Game.gun_guy_count > 15:
+			% Nathan: Nope.
+			% Nathan: Still nope.
+			% Nathan: Nice try.
+		else:
+			Nathan: Nope.
+		=> END
+	
+	if Game.gun_guy_count == 10:
+		Nathan: Alright punk.
+		Nathan: I see what you're doing here.
+		Nathan: You think that if you just keep talking to me, something interesting might happen.
+		Nathan: ...
+		Nathan: Well I've had just about enough of your shenanigans. You hooligan.
+		Nathan: Give me that thing back. I'm taking it from you.
+		set Game.has_gun = false
+		do Game.has_gun_signal.emit()
+		Nathan: Come back when you've learned yourself some manners.
+		set Game.gun_guy_count += 1
+		=> END
+
+
+=> END

@@ -1,0 +1,45 @@
+[gd_scene load_steps=10 format=3 uid="uid://bgqo3bukh15ye"]
+
+[ext_resource type="AudioStream" uid="uid://buferipqe3nrd" path="res://assets/sound/ploop.wav" id="1_m08hi"]
+[ext_resource type="AudioStream" uid="uid://c1i50pvs1usik" path="res://assets/sound/kchee.wav" id="2_o7hjm"]
+[ext_resource type="AudioStream" uid="uid://hwb3s8svjrpx" path="res://assets/sound/beeero.wav" id="3_6mnqp"]
+[ext_resource type="AudioStream" uid="uid://wfkx00mwgpfg" path="res://assets/sound/pllllp.wav" id="5_bfrj7"]
+[ext_resource type="AudioStream" uid="uid://comg0fh4xsmck" path="res://assets/sound/explode.wav" id="5_td40o"]
+[ext_resource type="AudioStream" uid="uid://c8ydffgmne6u2" path="res://assets/sound/baaagh.wav" id="6_7241v"]
+[ext_resource type="AudioStream" uid="uid://sln1nlhn7lhv" path="res://assets/sound/bough.wav" id="6_w8hq7"]
+[ext_resource type="AudioStream" uid="uid://c5rp5w0w8im72" path="res://assets/sound/546594__ryzen1130__nice-sound-effect.mp3" id="8_jp2k0"]
+[ext_resource type="AudioStream" uid="uid://0i1avj71dn5w" path="res://assets/sound/pew.wav" id="8_jqkwn"]
+
+[node name="Audio" type="Node2D"]
+
+[node name="jump" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("1_m08hi")
+
+[node name="wallhit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_o7hjm")
+
+[node name="gravity" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_6mnqp")
+
+[node name="door" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_7241v")
+volume_db = 3.0
+
+[node name="explode" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_td40o")
+
+[node name="fall" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_7241v")
+
+[node name="bigfall" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_w8hq7")
+
+[node name="win" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_jp2k0")
+volume_db = 3.962
+
+[node name="shoot" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_jqkwn")
+
+[node name="player_death" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_bfrj7")

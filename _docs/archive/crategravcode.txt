@@ -1,0 +1,26 @@
+#	# disable crate gravity on impact
+#	current_up_collides = []
+#	while up_cast.is_colliding():
+#		var obj = up_cast.get_collider() #get the next object that is colliding.
+#		if obj != null:
+#			# obj.crate_gravity_is_on = false
+#			# obj.freeze = true
+#			current_up_collides.append(obj) #add it to the array.
+#			up_cast.add_exception(obj) #add to ray's exception. That way it could detect something being behind it.
+#			up_cast.force_raycast_update() #update the ray's collision query.
+#		else:
+#			# print("null collider")
+#			break
+#
+#	# test
+##	if current_up_collides != previous_up_collides:
+##		for obj in previous_up_collides:
+##			if !current_up_collides.has(obj):
+##				if obj != null:
+##					obj.crate_gravity_is_on = true
+#
+#	# after all is done, remove the objects from ray's exception.
+#	for obj in current_up_collides:
+#		up_cast.remove_exception(obj)
+#	# set previous to current
+#	previous_up_collides = current_up_collides
