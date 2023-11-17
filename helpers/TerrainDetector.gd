@@ -13,22 +13,41 @@ var overlapping_tiles: Array = []
 var current_tile = -1
 var previous_tile = -1
 
+
 # get unique array of all tile types
 func _process_tile_data() -> void:
+	
 	var types = []
+	var type_dict = {
+		TerrainType.NONE: false,
+		TerrainType.REVERSE: false,
+		TerrainType.FORWARD: false,
+		TerrainType.SPIKE: false,
+	}
+	
 	for tile in overlapping_tiles:
 		var type: int = tile["type"]
 		types.append(type)
+		# set colliding with tile type to true
+		if type_dict.has(type):
+			type_dict[type] = true
 	
-	if !types.is_empty():
-		current_tile = types[-1]
+	# print(types)
+	# print(type_dict)
+	if !types.is_empty():  # is colliding with at least 1 tile
+		if type_dict[TerrainType.SPIKE] == true:
+			current_tile = TerrainType.SPIKE
+		else:
+			current_tile = types[-1]
 	else:
-		# current_tile = 0
-		pass
+		pass  # do something if colliding with no tiles (airborne)
 	
+	# print(current_tile)
 	if current_tile != previous_tile:
 		emit_signal("terrain_entered", current_tile)
 		previous_tile = current_tile
+
+
 
 # get the type of a single tile
 func _get_type(body: TileMap, body_rid: RID) -> int:

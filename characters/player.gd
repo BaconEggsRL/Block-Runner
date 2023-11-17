@@ -106,14 +106,17 @@ func _physics_process(delta):
 		big_fall = true
 	
 	# Check for nocturne
-	if self.global_position.y > 10000:
-		if !Audio.get_node("nocturne").playing:
-			if !tween_started:
-				print("start tween")
-				var tween = get_tree().create_tween()
-				tween.tween_property(Audio.get_node("background_music"), "volume_db", -80, 3.00)
-				tween.tween_callback(_on_music_tween_completed)
-				tween_started = true
+	if get_tree().get_current_scene().name == "Level_1":
+		if self.global_position.y > 10000:
+			if !Audio.get_node("nocturne").playing:
+				if !tween_started:
+					print("start tween")
+					# Game.gravity = 0.0
+					# gravity = Game.gravity
+					var tween = get_tree().create_tween()
+					tween.tween_property(Audio.get_node("background_music"), "volume_db", -80, 3.00)
+					tween.tween_callback(_on_music_tween_completed)
+					tween_started = true
 
 	
 	# Reset position
