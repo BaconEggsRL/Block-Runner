@@ -1,3 +1,16 @@
+~ blocked_by_player
+Nathan: A bit close, aren't we?
+=> END
+
+~ blocked_by_generic
+Nathan: Could you move that, please?
+=> END
+
+~ player_high
+Nathan: Wow, how'd you get up there?
+=> END
+
+
 ~ start
 
 if Game.talked_to_nathan:

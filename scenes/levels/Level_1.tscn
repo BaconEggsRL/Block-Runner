@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://iy8rl4wh43hy" path="res://scenes/destroyables/crate.tscn" id="5_nicug"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gqra4"]
-size = Vector2(120, 109)
+size = Vector2(16, 72)
 
 [node name="Level_1" instance=ExtResource("1_ua1u0")]
 
@@ -18,17 +18,17 @@ layer_0/tile_data = PackedInt32Array(1310725, 196608, 3, 1376261, 196608, 3, 144
 position = Vector2(760, 432)
 
 [node name="gun_guy" parent="environment/actionables" index="0" instance=ExtResource("2_xnjjm")]
-position = Vector2(521, 448)
+position = Vector2(512, 448)
 
 [node name="Actionable" parent="environment/actionables/gun_guy" index="1" instance=ExtResource("3_67p53")]
 dialogue_resource = ExtResource("4_dyujk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="environment/actionables/gun_guy/Actionable" index="0"]
-position = Vector2(0, -10.5)
+position = Vector2(0, -28)
 shape = SubResource("RectangleShape2D_gqra4")
 
 [node name="crate" parent="environment/destroyables" index="0" instance=ExtResource("5_nicug")]
-position = Vector2(234, 341)
+position = Vector2(233, 362)
 
 [node name="player" parent="." index="2"]
 position = Vector2(235, 437)

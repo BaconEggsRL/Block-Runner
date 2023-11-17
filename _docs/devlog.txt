@@ -24,8 +24,6 @@ v0.06
 -new game dialogue for nathan
 -removed old code / nodes on crate that weren't being used
 
-========================================================================================
-
 v0.07
 -added VERSION CONTROL (GIT)
 -fixed an issue where controller input would lag/stutter the game. Removed all controller input for now.
@@ -33,11 +31,33 @@ v0.07
 -parallax / game background for levels
 -updated base scene nodes and drawing order
 
+========================================================================================
+
+general dev notes:
+-actionables are attached to characters in the scene in the editor, since their actions may depend on the scene
+-the export variables allow you to attach dialogue resources and starts to that specific instance/scene
+
+========================================================================================
+
+
+
+v0.08
+-sound fx for dialogue (DONE--could edit later to add sounds for characters)
+-refactored player code... it was a mess
+-prevent moving during nathan's dialogue
+-refeined hitboxes for dialogue and new options based on crate position, player height, and player overlap
+
+v0.09
+-remove jumping as a dialogue action, only E now
+
+
+
 TODO:
+-add menus to tips to show player controls... need hint for interactable
 -add cutscene for falling off edge
--sound fx for dialogue
 -background music
 -velocity boost from gun bullets
+-move jump code inside physics, only check for input on unhandled input
 
 OTHER:
 #-fix weird single pixel layer offset for player ground collisions and crates in fullscreen -- nah, doesn't happen on itch.io

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bgqo3bukh15ye"]
+[gd_scene load_steps=11 format=3 uid="uid://bgqo3bukh15ye"]
 
 [ext_resource type="AudioStream" uid="uid://buferipqe3nrd" path="res://assets/sound/ploop.wav" id="1_m08hi"]
 [ext_resource type="AudioStream" uid="uid://c1i50pvs1usik" path="res://assets/sound/kchee.wav" id="2_o7hjm"]
@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://sln1nlhn7lhv" path="res://assets/sound/bough.wav" id="6_w8hq7"]
 [ext_resource type="AudioStream" uid="uid://c5rp5w0w8im72" path="res://assets/sound/546594__ryzen1130__nice-sound-effect.mp3" id="8_jp2k0"]
 [ext_resource type="AudioStream" uid="uid://0i1avj71dn5w" path="res://assets/sound/pew.wav" id="8_jqkwn"]
+[ext_resource type="AudioStream" uid="uid://cqn43k1nb7x62" path="res://assets/sound/dialogue.wav" id="10_yoihe"]
 
 [node name="Audio" type="Node2D"]
 
@@ -43,3 +44,6 @@ stream = ExtResource("8_jqkwn")
 
 [node name="player_death" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_bfrj7")
+
+[node name="dialogue" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_yoihe")

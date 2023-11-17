@@ -1,5 +1,6 @@
 extends CanvasLayer
 
+@onready var audio: AudioStreamPlayer2D = Audio.get_node("dialogue")
 
 @onready var balloon: Panel = %Balloon
 @onready var character_label: RichTextLabel = %CharacterLabel
@@ -28,6 +29,8 @@ var dialogue_line: DialogueLine:
 			queue_free()
 			return
 
+		
+		
 		dialogue_line = next_dialogue_line
 
 		character_label.visible = not dialogue_line.character.is_empty()
@@ -44,8 +47,12 @@ var dialogue_line: DialogueLine:
 		will_hide_balloon = false
 
 		dialogue_label.show()
+		
+		# play sound if there is a line that's not silent
+		if dialogue_line.text != "...":
+			audio.play()
 		if not dialogue_line.text.is_empty():
-			dialogue_label.type_out()
+			dialogue_label.type_out()  ###################################
 			await dialogue_label.finished_typing
 
 		# Wait for input
