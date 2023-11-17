@@ -7,19 +7,19 @@
 [node name="BG" type="ParallaxBackground"]
 script = ExtResource("1_abs8q")
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+[node name="normal_layer" type="ParallaxLayer" parent="."]
 motion_mirroring = Vector2(1152, 1296)
 
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer"]
+[node name="Sprite2D" type="Sprite2D" parent="normal_layer"]
 texture_filter = 1
 scale = Vector2(3, 2.7)
 texture = ExtResource("1_dh2ys")
 centered = false
 
-[node name="ParallaxLayerFlipped" type="ParallaxLayer" parent="."]
+[node name="flipped_layer" type="ParallaxLayer" parent="."]
 motion_mirroring = Vector2(1152, 1296)
 
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayerFlipped"]
+[node name="Sprite2D" type="Sprite2D" parent="flipped_layer"]
 position = Vector2(0, 648)
 scale = Vector2(3, 2.7)
 texture = ExtResource("2_pnxy2")

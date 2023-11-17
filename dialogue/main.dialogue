@@ -1,13 +1,29 @@
 ~ blocked_by_player
-Nathan: A bit close, aren't we?
+if Game.gun_guy_count < 10:
+	%3 Nathan: A bit close, aren't we?
+	%2 Nathan: Feeling a bit claustrophobic here.
+else:
+	%2 Nathan: Do I need to file a restraining order or something?
+	%3 Nathan: Get off of me.
 => END
 
 ~ blocked_by_generic
-Nathan: Could you move that, please?
+if Game.gun_guy_count < 10:
+	% Nathan: Could you move that, please?
+	% Nathan: Who's there?
+else:
+	% Nathan: Real funny.
 => END
 
 ~ player_high
-Nathan: Wow, how'd you get up there?
+if Game.gun_guy_count < 10:
+	Nathan: Wow, how'd you get up there?
+	if Game.get_rand() > 0.5:
+		Nathan: Could you teach me to do that?
+else:
+	Nathan: Look at you, way up there. Great job.
+	Nathan: I bet your mom is proud of you.
+	Nathan: Unlike some people.
 => END
 
 

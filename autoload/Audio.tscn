@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bgqo3bukh15ye"]
+[gd_scene load_steps=13 format=3 uid="uid://bgqo3bukh15ye"]
 
 [ext_resource type="AudioStream" uid="uid://buferipqe3nrd" path="res://assets/sound/ploop.wav" id="1_m08hi"]
 [ext_resource type="AudioStream" uid="uid://c1i50pvs1usik" path="res://assets/sound/kchee.wav" id="2_o7hjm"]
@@ -10,11 +10,14 @@
 [ext_resource type="AudioStream" uid="uid://c5rp5w0w8im72" path="res://assets/sound/546594__ryzen1130__nice-sound-effect.mp3" id="8_jp2k0"]
 [ext_resource type="AudioStream" uid="uid://0i1avj71dn5w" path="res://assets/sound/pew.wav" id="8_jqkwn"]
 [ext_resource type="AudioStream" uid="uid://cqn43k1nb7x62" path="res://assets/sound/dialogue.wav" id="10_yoihe"]
+[ext_resource type="AudioStream" uid="uid://dtby4ukfr2ibr" path="res://assets/sound/clipped_nocturne.wav" id="11_su7ad"]
+[ext_resource type="AudioStream" uid="uid://c7weiobqfvo53" path="res://assets/sound/chill-abstract-intention-12099.mp3" id="12_y5xpw"]
 
 [node name="Audio" type="Node2D"]
 
 [node name="jump" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("1_m08hi")
+volume_db = 3.0
 
 [node name="wallhit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_o7hjm")
@@ -47,3 +50,11 @@ stream = ExtResource("5_bfrj7")
 
 [node name="dialogue" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("10_yoihe")
+
+[node name="nocturne" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_su7ad")
+
+[node name="background_music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_y5xpw")
+volume_db = -15.0
+autoplay = true

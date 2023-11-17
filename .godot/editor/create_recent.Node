@@ -1,5 +1,9 @@
-RayCast2D
+AudioStreamPlayer
+Timer
 AudioStreamPlayer2D
+Label
+Control
+RayCast2D
 Node2D
 ParallaxBackground
 Sprite2D
@@ -9,12 +13,9 @@ AnimatedSprite2D
 StaticBody2D
 CollisionShape2D
 Area2D
-Control
 CenterContainer
-Label
 CanvasLayer
 Line2D
-Timer
 GPUParticles2D
 RigidBody2D
 WorldEnvironment

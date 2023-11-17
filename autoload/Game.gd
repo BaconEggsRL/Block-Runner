@@ -57,6 +57,10 @@ func nextLevel():
 func resetLevel():
 	gravity = DEFAULT_GRAVITY
 	crate_gravity = DEFAULT_CRATE_GRAVITY
+	if Audio.get_node("nocturne").playing:
+		Audio.get_node("nocturne").stop()
+		Audio.get_node("background_music").volume_db = -10
+		Audio.get_node("background_music").play()
 	get_tree().reload_current_scene()
 	
 func resetGame():

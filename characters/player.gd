@@ -10,6 +10,7 @@ var gravity = Game.gravity
 var current_terrain: int = 0
 var is_jumping = false
 var big_fall = false
+
 var direction = Input.get_axis("ui_left", "ui_right")
 @onready var coyote_timer = $CoyoteTimer
 @onready var jump_buffer = $JumpBuffer
@@ -23,9 +24,16 @@ var direction = Input.get_axis("ui_left", "ui_right")
 # actionable finder
 @onready var actionable_finder: Area2D = $Direction/ActionableFinder
 
+# nocturne
+signal nocturne
+var tween_started = false
 
 
 func _ready():
+	if Audio.get_node("nocturne").playing:
+		print("stop")
+		Audio.get_node("nocturne").stop()
+
 	Game.has_gun_signal.connect(_on_Game_has_gun_signal)
 	if Game.has_gun == true:
 		self.spawn_gun()
@@ -75,6 +83,16 @@ func jump_cut():
 			velocity.y = 100
 
 
+func _on_music_tween_completed():
+	print("end tween")
+	# stop the music -- otherwise it continues to run at silent volume
+	Audio.get_node("background_music").stop()
+	Audio.get_node("background_music").volume_db = -10 # reset volume
+	# play
+	Audio.get_node("nocturne").play()
+	nocturne.emit()
+	
+	
 func _physics_process(delta):
 
 	# Add the gravity.
@@ -86,6 +104,21 @@ func _physics_process(delta):
 	# Check for big fall
 	if abs(velocity.y) > 500:
 		big_fall = true
+	
+	# Check for nocturne
+	if self.global_position.y > 10000:
+		if !Audio.get_node("nocturne").playing:
+			if !tween_started:
+				print("start tween")
+				var tween = get_tree().create_tween()
+				tween.tween_property(Audio.get_node("background_music"), "volume_db", -80, 3.00)
+				tween.tween_callback(_on_music_tween_completed)
+				tween_started = true
+
+	
+	# Reset position
+	if self.global_position.y > 900000:
+		self.global_position.y = 10000
 	
 	# Perform movement and other inputs based on terrain type
 	# Also perform this when changing terrain?
@@ -107,6 +140,8 @@ func _physics_process(delta):
 			Audio.get_node("player_death").play()
 			Game.death_counter += 1
 			Game.resetLevel()
+		_: # OTHER
+			print("invalid terrain")
 	
 	# move and slide
 	var was_on_floor = is_on_floor()

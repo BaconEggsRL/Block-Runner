@@ -14,7 +14,7 @@ size = Vector2(18, 34)
 size = Vector2(16, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fp4ew"]
-size = Vector2(43, 34)
+size = Vector2(40, 34)
 
 [node name="player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 17
@@ -85,7 +85,7 @@ collision_layer = 0
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Direction/ActionableFinder"]
-position = Vector2(21.5, 0)
+position = Vector2(20, 0)
 shape = SubResource("RectangleShape2D_fp4ew")
 
 [connection signal="body_shape_entered" from="crate_detector" to="." method="_on_crate_detector_body_shape_entered"]

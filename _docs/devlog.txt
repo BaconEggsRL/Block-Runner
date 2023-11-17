@@ -31,6 +31,18 @@ v0.07
 -parallax / game background for levels
 -updated base scene nodes and drawing order
 
+v0.08
+-sound fx for dialogue (DONE--could edit later to add sounds for characters)
+-refactored player code... it was a mess
+-prevent moving during nathan's dialogue
+-refeined hitboxes for dialogue and new options based on crate position, player height, and player overlap
+
+v0.09
+-added more dialogue options
+-added label tips to show player controls
+-added nocturne cutscene for falling off edge
+-background music
+
 ========================================================================================
 
 general dev notes:
@@ -39,23 +51,10 @@ general dev notes:
 
 ========================================================================================
 
-
-
-v0.08
--sound fx for dialogue (DONE--could edit later to add sounds for characters)
--refactored player code... it was a mess
--prevent moving during nathan's dialogue
--refeined hitboxes for dialogue and new options based on crate position, player height, and player overlap
-
-v0.09
--remove jumping as a dialogue action, only E now
-
-
-
 TODO:
--add menus to tips to show player controls... need hint for interactable
--add cutscene for falling off edge
--background music
+-fix bug where spike don't kill if colliding with regular ground tiles
+-fix bug where you can still slide into NPC but claustrophobic is not detected
+
 -velocity boost from gun bullets
 -move jump code inside physics, only check for input on unhandled input
 
