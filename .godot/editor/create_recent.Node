@@ -1,8 +1,8 @@
+Label
 Sprite2D
 AudioStreamPlayer
 Timer
 AudioStreamPlayer2D
-Label
 Control
 RayCast2D
 Node2D

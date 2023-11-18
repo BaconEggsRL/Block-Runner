@@ -44,6 +44,13 @@ v0.09
 -added nocturne cutscene for falling off edge
 -background music
 
+v0.10
+-gradient code update for nocturne
+-more variation in nocturne art (colors, patterns etc. past 39 seconds.)
+-fixed bug, spike sometimes don't kill if colliding with regular ground tiles (example--level 2 left side), added code to detect which types of terrain are being collided with and special logic for spike collision
+-modified balloon code for custom actionable input and skip
+-modified tip labels
+
 ========================================================================================
 
 General dev notes:
@@ -52,24 +59,31 @@ General dev notes:
 
 ========================================================================================
 
-v0.10
--gradient code update for nocturne
--more variation in nocturne art (colors, patterns etc. past 39 seconds.)
--fixed bug, spike sometimes don't kill if colliding with regular ground tiles (example--level 2 left side), added code to detect which types of terrain are being collided with and special logic for spike collision
+user://
+%APPDATA%\Godot\app_userdata\Project Name
+
+
+v0.11
+-save nathan_mad state (done--can only reset by beating game or clearing cache now.)
+-added nathan dialogue for nocturne
+-added nathan dialogue for missing music 
+
 
 TODO:
 
-BUGS:
--crate sometimes shoots out from under you really fast, don't really know why
 
 FEATURES/IMPROVEMENTS:
+-add mute button (music / sfx?)
 -velocity boost from gun bullets
 -new tiles (water, air)
 -new pickups (rotate left, rotate right)
 -enemies
 
+BUGS:
+-N/A
 
 OTHER:
+#-crate sometimes shoots out from under you really fast, don't really know why
 #-replay value--highscore/alternate routes/unlocks?
 #-move jump code inside physics, only check for input on unhandled input
 #-nathan dialogue for shooting / falling off left side?

@@ -24,24 +24,16 @@ var direction = Input.get_axis("ui_left", "ui_right")
 # actionable finder
 @onready var actionable_finder: Area2D = $Direction/ActionableFinder
 
-# nocturne
-signal nocturne
-var tween_started = false
-
-
 func _ready():
-	if Audio.get_node("nocturne").playing:
-		print("stop")
-		Audio.get_node("nocturne").stop()
-
 	Game.has_gun_signal.connect(_on_Game_has_gun_signal)
 	if Game.has_gun == true:
 		self.spawn_gun()
 
 
 func _unhandled_input(_event: InputEvent) -> void:
+
 	# Handle dialogue input
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if Input.is_action_just_pressed("actionable") and is_on_floor():
 		var actionables = actionable_finder.get_overlapping_areas()
 		if actionables.size() > 0:
 			var dstart = actionables[0].get_parent().get_dialogue_start()
@@ -83,16 +75,6 @@ func jump_cut():
 			velocity.y = 100
 
 
-func _on_music_tween_completed():
-	print("end tween")
-	# stop the music -- otherwise it continues to run at silent volume
-	Audio.get_node("background_music").stop()
-	Audio.get_node("background_music").volume_db = -10 # reset volume
-	# play
-	Audio.get_node("nocturne").play()
-	nocturne.emit()
-	
-	
 func _physics_process(delta):
 
 	# Add the gravity.
@@ -108,17 +90,8 @@ func _physics_process(delta):
 	# Check for nocturne
 	if get_tree().get_current_scene().name == "Level_1":
 		if self.global_position.y > 10000:
-			if !Audio.get_node("nocturne").playing:
-				if !tween_started:
-					print("start tween")
-					# Game.gravity = 0.0
-					# gravity = Game.gravity
-					var tween = get_tree().create_tween()
-					tween.tween_property(Audio.get_node("background_music"), "volume_db", -80, 3.00)
-					tween.tween_callback(_on_music_tween_completed)
-					tween_started = true
+			Game.tween_music()
 
-	
 	# Reset position
 	if self.global_position.y > 900000:
 		self.global_position.y = 10000

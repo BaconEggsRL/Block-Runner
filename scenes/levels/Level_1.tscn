@@ -1,11 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://b4yg8a7yv2duc"]
+[gd_scene load_steps=8 format=3 uid="uid://b4yg8a7yv2duc"]
 
 [ext_resource type="PackedScene" uid="uid://d1sceydxqxpp5" path="res://scenes/levels/BaseLevel.tscn" id="1_ua1u0"]
 [ext_resource type="PackedScene" uid="uid://jbvqjowbie6m" path="res://characters/NPCs/gun_guy.tscn" id="2_xnjjm"]
 [ext_resource type="PackedScene" uid="uid://dyqecpsx0holt" path="res://helpers/actionable.tscn" id="3_67p53"]
 [ext_resource type="Resource" uid="uid://dj2n8ibaem6de" path="res://dialogue/main.dialogue" id="4_dyujk"]
 [ext_resource type="PackedScene" uid="uid://iy8rl4wh43hy" path="res://scenes/destroyables/crate.tscn" id="5_nicug"]
-[ext_resource type="Theme" uid="uid://bm78215mkmk7y" path="res://assets/theme.tres" id="6_5i5i0"]
 [ext_resource type="Script" path="res://scenes/levels/ShootTip.gd" id="6_bwnmc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gqra4"]
@@ -45,22 +44,45 @@ offset_bottom = 40.0
 
 [node name="ShootTip" type="Label" parent="Control" index="0"]
 layout_mode = 0
-offset_left = 419.0
-offset_top = 476.0
-offset_right = 556.0
-offset_bottom = 503.0
+offset_left = 415.0
+offset_top = 478.0
+offset_right = 552.0
+offset_bottom = 504.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Left click to shoot"
+horizontal_alignment = 1
+vertical_alignment = 1
 script = ExtResource("6_bwnmc")
 
-[node name="ControlsLabel" type="Label" parent="Control" index="1"]
+[node name="InteractTip" type="Label" parent="Control" index="1"]
 layout_mode = 0
-offset_left = 143.0
-offset_top = 452.0
-offset_right = 881.0
-offset_bottom = 478.0
-theme = ExtResource("6_5i5i0")
+offset_left = 413.0
+offset_top = 454.0
+offset_right = 553.0
+offset_bottom = 480.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "WASD to move                          Press E or Spacebar to interact                   Touch door to proceed"
+text = "Press E to interact"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[connection signal="nocturne" from="player" to="BG" method="_on_player_nocturne"]
+[node name="MoveTip" type="Label" parent="Control" index="2"]
+layout_mode = 0
+offset_left = 146.0
+offset_top = 454.0
+offset_right = 260.0
+offset_bottom = 480.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "WASD to move"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DoorTip" type="Label" parent="Control" index="3"]
+layout_mode = 0
+offset_left = 672.0
+offset_top = 454.0
+offset_right = 848.0
+offset_bottom = 480.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Touch door to proceed"
+horizontal_alignment = 1
+vertical_alignment = 1

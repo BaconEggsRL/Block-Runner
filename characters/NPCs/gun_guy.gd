@@ -20,6 +20,11 @@ func get_dialogue_start() -> String:
 			dialogue_start = "player_high"
 		else:
 			dialogue_start = "start"
+			if Game.saw_nocturne:
+				dialogue_start = "saw_nocturne"
+			if Game.music_missing:
+				dialogue_start = "music_missing"
+			
 	return dialogue_start
 	
 func _process(_delta):

@@ -54,7 +54,7 @@ stream = ExtResource("10_yoihe")
 [node name="nocturne" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_su7ad")
 
-[node name="background_music" type="AudioStreamPlayer" parent="."]
+[node name="bg_music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_y5xpw")
 volume_db = -15.0
 autoplay = true

@@ -6,10 +6,9 @@ extends ParallaxBackground
 
 var scrolling_speed = 100
 
-@onready var song: AudioStreamPlayer = Audio.get_node("nocturne")
-@onready var song_length = song.stream.get_length()
+@onready var nocturne: AudioStreamPlayer = Audio.get_node("nocturne")
+@onready var nocturne_length = nocturne.stream.get_length()
 var current_time: float = 0.0
-var nocturne = false
 
 var near_black = Color(75/255.0, 75/255.0, 75/255.0, 155/255.0)
 var purple = Color(255/255.0, 44/255.0, 255/255.0, 255/255.0)
@@ -80,7 +79,7 @@ func _ready():
 		# get current event
 		var e = event_list[index]
 		# create gradient key in range 0,1 from event timestamp (in range 0,song_length)
-		var key = clamp(remap(e[0], 0.0, song_length, 0, 1), 0, 1)
+		var key = clamp(remap(e[0], 0.0, nocturne_length, 0, 1), 0, 1)
 		
 		# get color associated with that key
 		var color_value = e[1]
@@ -102,14 +101,16 @@ func _ready():
 
 
 func _process(delta):
+	# scroll bg for when there is no player camera
 	scroll_offset.x -= scrolling_speed * delta
 	
-	if nocturne:
+	if nocturne.playing:
 		# get current time
-		current_time = snappedf(song.get_playback_position(), 0.01)
+		current_time = snappedf(nocturne.get_playback_position(), 0.01)
 		# print(current_time)
 		# convert time to range 0,1 for gradient
-		var key = clamp(remap(current_time, 0.0, song_length, 0, 1), 0, 1)
+		var key = clamp(remap(current_time, 0.0, nocturne_length, 0, 1), 0, 1)
+		
 		# get color and interpolation
 		var interp: Color = interpolation_gradient.sample(key)
 		var current_color: Color
@@ -117,17 +118,17 @@ func _process(delta):
 			current_color = color_gradient.sample(key)
 		else: # constant
 			current_color = constant_gradient.sample(key)
-		# set color
-		if get_color(0) != current_color and current_time>=5.00:
-			set_color(current_color)
-			# print("set color", current_color)
+		
+		# set color for start and saw nocturne
+		if current_time >= 5.00:
+			if Game.saw_nocturne == false:
+				Game.saw_nocturne = true
+				print("saw_nocturne = true")
+			if get_color(0) != current_color:
+				set_color(current_color)
 
 
 
-
-func _on_player_nocturne() -> void:
-	nocturne = true
-	
 func set_color(c: Color) -> void:
 	layer1.set_modulate(c)
 	layer2.set_modulate(c)
