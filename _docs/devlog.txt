@@ -1,3 +1,16 @@
+========================================================================================
+
+General dev notes:
+-actionables are attached to characters in the scene in the editor, since their actions may depend on the scene
+-the export variables allow you to attach dialogue resources and starts to that specific instance/scene
+
+save data:
+user://savegame.bin
+%APPDATA%\Godot\app_userdata\Project Name
+
+========================================================================================
+
+
 VERSION HISTORY:
 
 v0.01
@@ -56,23 +69,7 @@ v0.11
 -added nathan dialogue for nocturne
 -added nathan dialogue for missing music 
 
-========================================================================================
-
-General dev notes:
--actionables are attached to characters in the scene in the editor, since their actions may depend on the scene
--the export variables allow you to attach dialogue resources and starts to that specific instance/scene
-
-save data:
-user://savegame.bin
-%APPDATA%\Godot\app_userdata\Project Name
-
-========================================================================================
-
-
-
-
-
-v0.11.1
+v0.12
 - fixed bug where forces applied to crate cause it to lose contact with the ground momentarily, causing it to sometimes rotate unexpectedly. this was caused by issues with tilemap collisions on the borders between tiles.
 This is a documented issue with godot for rigidbodies -- github.com/godotengine/godot/issues/47148
 The solution was to implement a baked collision shape so that the boundaries between tiles are no longer an issue. -- github.com/popcar2/GodotTilemapBaker
@@ -84,6 +81,15 @@ I assumed this was caused by the crate_detector changing the physics layers but 
 certain gaps between crates cannot be traversed across. player just gets stuck. likely due to requirement of raycast to apply force to crates
 removed raycast check--seems like no adverse effects. can't replicate bug anymore in test level
 Mark as fixed for now? Could also have something to do with crates not being on level ground.
+
+- minor update, saving this version before messing with native source code
+
+
+========================================================================================
+
+
+v0.13
+
 
 TODO:
 
