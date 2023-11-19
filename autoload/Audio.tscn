@@ -17,7 +17,7 @@
 
 [node name="jump" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("1_m08hi")
-volume_db = 3.0
+volume_db = 2.0
 
 [node name="wallhit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_o7hjm")
@@ -32,15 +32,9 @@ volume_db = 3.0
 [node name="explode" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_td40o")
 
-[node name="fall" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("6_7241v")
-
 [node name="bigfall" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_w8hq7")
-
-[node name="win" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("8_jp2k0")
-volume_db = 3.962
+volume_db = 2.0
 
 [node name="shoot" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_jqkwn")
@@ -50,6 +44,10 @@ stream = ExtResource("5_bfrj7")
 
 [node name="dialogue" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("10_yoihe")
+
+[node name="win" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_jp2k0")
+volume_db = 3.0
 
 [node name="nocturne" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_su7ad")

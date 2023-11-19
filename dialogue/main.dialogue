@@ -67,16 +67,12 @@ else:
 => END
 
 
-~ start
+~ met_before
+Nathan: Haven't we met before?
+=> END
 
-if Game.talked_to_nathan:
-	if Game.beat_the_game:
-		set Game.beat_the_game = false
-		set Game.gun_guy_count = 0
-		Nathan: Haven't we met before?
-		=> END
-else:
-	set Game.talked_to_nathan = true
+
+~ start
 
 if !Game.has_gun and Game.gun_guy_count < Game.NATHAN_MAD_COUNT:
 	
@@ -121,6 +117,7 @@ else:
 			else:
 				% Nathan: What do you want?
 				% Nathan: What is it?
+				% Nathan: Can I help you?
 		=> END
 		
 	if Game.gun_guy_count > Game.NATHAN_MAD_COUNT:

@@ -10,6 +10,7 @@ extends StaticBody2D
 func get_dialogue_start() -> String:
 	var player_height = round(player.global_position.y)
 	var bodies = actionable.get_overlapping_bodies()
+	
 	if bodies.size() > 0:
 		if bodies[0].is_in_group("player"):
 			dialogue_start = "blocked_by_player"
@@ -24,9 +25,17 @@ func get_dialogue_start() -> String:
 				dialogue_start = "saw_nocturne"
 			if Game.music_missing:
 				dialogue_start = "music_missing"
-			
-	return dialogue_start
 	
+	if Game.talked_to_nathan:
+		if Game.beat_the_game:
+			Game.beat_the_game = false
+			Game.gun_guy_count = 0
+			dialogue_start = "met_before"
+	
+	Game.talked_to_nathan = true
+	return dialogue_start
+
+
 func _process(_delta):
 	if player.position.x > self.position.x:
 		anim.play("right")

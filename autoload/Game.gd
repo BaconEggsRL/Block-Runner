@@ -29,6 +29,17 @@ const DEFAULT_MUSIC_VOLUME: int = -15
 var tweening = false
 var restarted = false
 
+signal gravity_changed
+
+
+func change_gravity(new_gravity):
+	# update game vars
+	Game.gravity = new_gravity
+	Game.crate_gravity = sign(Game.gravity) * 9
+	# emit signal
+	gravity_changed.emit()
+	
+	
 func _on_music_tween_completed():
 	print("end tween")
 	tweening = false
@@ -110,12 +121,13 @@ func resetLevel():
 	restarted = true
 	get_tree().reload_current_scene()
 	
-func resetGame():
+func resetGame():  # beat the game
 	Game.beat_the_game = true
 	Game.gravity = DEFAULT_GRAVITY
 	Game.crate_gravity = DEFAULT_CRATE_GRAVITY
 	# Game.has_gun = DEFAULT_HAS_GUN
 	Game.death_counter = DEFAULT_DEATH_COUNTER
+	saveGame()
 	get_tree().change_scene_to_file(start_level_path)
 
 
@@ -137,7 +149,7 @@ func loadGame():
 		if not file.eof_reached():
 			var current_line = JSON.parse_string(file.get_line())
 			if current_line: # returns null if parsing failed
-				# Game.has_gun = current_line["has_gun"]
+				Game.has_gun = current_line["has_gun"]
 				Game.talked_to_nathan = current_line["talked_to_nathan"]
-				# Game.beat_the_game = current_line["beat_the_game"]
+				Game.beat_the_game = current_line["beat_the_game"]
 				Game.gun_guy_count = current_line["gun_guy_count"]

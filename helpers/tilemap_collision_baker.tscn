@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdgi5usq26mb7"]
+
+[ext_resource type="Script" path="res://helpers/TilemapCollisionBaker.gd" id="1_3yj7s"]
+
+[node name="TilemapCollisionBaker" type="StaticBody2D"]
+script = ExtResource("1_3yj7s")

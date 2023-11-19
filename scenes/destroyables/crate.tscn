@@ -12,7 +12,7 @@ bounce = 0.2
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5qexc"]
 size = Vector2(36, 36)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_t8c85"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4i34u"]
 size = Vector2(32, 32)
 
 [node name="crate" type="RigidBody2D" groups=["crate", "destroyable", "moveable"]]
@@ -27,6 +27,10 @@ can_sleep = false
 script = ExtResource("1_na3ct")
 explosion_effect = ExtResource("2_mhi5w")
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_nntka")
+
 [node name="terrain_detector" parent="." node_paths=PackedStringArray("detector_shape") instance=ExtResource("3_6304l")]
 detector_shape = NodePath("DetectorShape")
 
@@ -34,10 +38,6 @@ detector_shape = NodePath("DetectorShape")
 shape = SubResource("RectangleShape2D_5qexc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_t8c85")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture_filter = 1
-texture = ExtResource("1_nntka")
+shape = SubResource("RectangleShape2D_4i34u")
 
 [connection signal="terrain_entered" from="terrain_detector" to="." method="_on_terrain_detector_terrain_entered"]

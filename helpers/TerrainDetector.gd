@@ -32,15 +32,16 @@ func _process_tile_data() -> void:
 		if type_dict.has(type):
 			type_dict[type] = true
 	
-	# print(types)
-	# print(type_dict)
+	# print(get_parent(), types)
+	# print(get_parent(), type_dict)
 	if !types.is_empty():  # is colliding with at least 1 tile
 		if type_dict[TerrainType.SPIKE] == true:
 			current_tile = TerrainType.SPIKE
 		else:
 			current_tile = types[-1]
 	else:
-		pass  # do something if colliding with no tiles (airborne)
+		# do something if colliding with no tiles (airborne)
+		pass
 	
 	# print(current_tile)
 	if current_tile != previous_tile:

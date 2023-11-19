@@ -2,39 +2,22 @@ extends RigidBody2D
 
 @export var explosion_effect: PackedScene
 var exploded = false
-var crate_gravity_is_on = true
+
 @onready var player: CharacterBody2D = get_node("../../../player")
-var collision_i = 1
-var max_collisions = 30
-@onready var area = $terrain_detector
+@onready var terrain = $terrain_detector
+@onready var gravity = Game.gravity
 
 
-func still_colliding_with_player() -> bool:
-	var c = self.get_colliding_bodies()
-	for body in c:
-		if body is CharacterBody2D:
-			return true
-	return false
+func _ready():
+	Game.gravity_changed.connect(_on_Game_gravity_changed)
 	
-
-func _physics_process(_delta):
-#	if self.get_collision_layer_value(1):
-#		if still_colliding_with_player():
-#			collision_i = 1
-#		else:
-#			if collision_i > max_collisions:
-#				self.set_collision_layer_value(1, false)
-#				collision_i = 1
-#				print("OFF collision")
-#			else:
-#				collision_i += 1
-			
+	
+func _physics_process(delta):
 	var velocity = get_linear_velocity()  # get velocity
-	if crate_gravity_is_on:
-		velocity.y += Game.crate_gravity  # apply gravity (change this line)
+	velocity.y += gravity * delta
 	set_linear_velocity(velocity)  # set velocity
 	# remove jitter
-	if abs(linear_velocity.y) <= abs(Game.crate_gravity) * 1.001:
+	if abs(linear_velocity.y) <= abs(gravity) * 1.001:
 		physics_material_override.absorbent = 1
 	else:
 		physics_material_override.absorbent = 0
@@ -48,6 +31,10 @@ func explode():
 		effect_instance.position = position
 		effect_instance.emitting = true
 		queue_free()
+
+
+func _on_Game_gravity_changed():
+	gravity = Game.gravity
 
 
 func _on_terrain_detector_terrain_entered(ter: int):

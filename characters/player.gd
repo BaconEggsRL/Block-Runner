@@ -25,6 +25,7 @@ var direction = Input.get_axis("ui_left", "ui_right")
 @onready var actionable_finder: Area2D = $Direction/ActionableFinder
 
 func _ready():
+	Game.gravity_changed.connect(_on_Game_gravity_changed)
 	Game.has_gun_signal.connect(_on_Game_has_gun_signal)
 	if Game.has_gun == true:
 		self.spawn_gun()
@@ -109,9 +110,11 @@ func _physics_process(delta):
 			else:
 				velocity.x = move_toward(velocity.x, 0, SPEED)
 		1: # REVERSE
-			velocity.x = move_toward(velocity.x, -1*SPEED, SPEED)
+			velocity.x = -1 * SPEED
+			# velocity.x = move_toward(velocity.x, -1*SPEED, SPEED)
 		2: # FAST
-			velocity.x = move_toward(velocity.x, 1*SPEED, SPEED)
+			velocity.x = SPEED
+			# velocity.x = move_toward(velocity.x, 1*SPEED, SPEED)
 		3: # SPIKE
 			Audio.get_node("player_death").play()
 			Game.death_counter += 1
@@ -123,19 +126,19 @@ func _physics_process(delta):
 	var was_on_floor = is_on_floor()
 	move_and_slide()
 	
-	# move crates
-	for i in get_slide_collision_count():
+	for i in get_slide_collision_count(): 	# detect crates and other rigid bodies for moving
 		var collision = get_slide_collision(i)
 		var collider = collision.get_collider()
-		if collider.is_in_group("moveable"):
-			if collider is RigidBody2D:
-				# apply force to move crates
-				if right_cast.is_colliding() or left_cast.is_colliding():
-					if collision.get_normal().is_normalized():
-						var impulse_dir = -1 * collision.get_normal()
-						var impulse_force = 1000.0
-						var impulse = impulse_dir * impulse_force
-						collider.apply_central_force(impulse)
+		if collider.is_in_group("moveable") and collider is RigidBody2D:
+			# apply force to move crates
+			var crate_speed = collider.get_linear_velocity().x
+			if crate_speed < SPEED:
+				var impulse_dir = -1 * collision.get_normal()
+				# no jittering: 450 but can't push 2 crates at all
+				# no jittering on single box push right only: 650
+				var impulse_force = 450
+				var impulse = impulse_dir * impulse_force
+				collider.apply_central_force(impulse)
 	
 	# play sound for falls
 	if !was_on_floor and is_on_floor():
@@ -164,19 +167,16 @@ func _on_terrain_detector_terrain_entered(ter: int):
 		if right_cast.is_colliding() or left_cast.is_colliding():
 			Audio.get_node("wallhit").play()
 
-func _on_gravity_flip_body_entered():
-	# print("grav")
-	Audio.get_node("gravity").play()
-	# update game vars
-	Game.gravity = -1 * Game.gravity
-	Game.crate_gravity = sign(Game.gravity) * 9
+
+func _on_Game_gravity_changed():
+	print("grav")
 	# update player vars
 	if Game.gravity > 0:
 		$crate_detector.position.y = -32
 	else:
 		$crate_detector.position.y = 0
 	gravity = Game.gravity
-	up_direction = -1 * up_direction
+	up_direction = (-1 * up_direction).normalized()  # up_direction must be normalized for move_and_slide
 	JUMP_VELOCITY = -1 * JUMP_VELOCITY
 	up_cast.target_position = -1 * up_cast.target_position
 	down_cast.target_position = -1 * down_cast.target_position
@@ -201,11 +201,16 @@ func _on_Game_has_gun_signal() -> void:
 		self.remove_gun()
 		
 func spawn_gun() -> void:
-	var gun = preload_gun.instantiate()
-	self.add_child(gun)
-	gun.position.y = -16
+	if !self.has_node("gun"):
+		var gun = preload_gun.instantiate()
+		self.add_child(gun)
+		gun.position.y = -16
+	else:
+		print("gun logic error: tried to create gun when player already has gun")
 
 func remove_gun() -> void:
-	var gun = $gun
-	self.remove_child(gun)
+	if self.has_node("gun"):
+		self.remove_child(self.get_node("gun"))
+	else:
+		print("gun logic error: tried to remove gun when player does not have gun")
 	
