@@ -90,7 +90,7 @@ func _physics_process(delta):
 	
 	# Check for nocturne
 	if get_tree().get_current_scene().name == "Level_1":
-		if self.global_position.y > 10000:
+		if self.global_position.y > 5000:
 			Game.tween_music()
 
 	# Reset position

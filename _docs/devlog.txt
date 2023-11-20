@@ -18,6 +18,13 @@ GENERAL DEV NOTES:
 -actionables are attached to characters in the scene in the editor, since their actions may depend on the scene
 -the export variables allow you to attach dialogue resources and starts to that specific instance/scene
 
+collision baking:
+-only works for square collision shapes (not slopes)
+-for spikes you may want to remove because it will block the terrain data (maybe? idk i regenerated and it worked)
+-you could modify the collision shapes after to also to prevent weird deaths
+-if the corner of a box hits a spike, but only on the collision layer 1 edge (not in middle of spike), then it will bounce off
+-either make spike collision box square, or remove the baked collision!
+
 save data:
 user://savegame.bin
 %APPDATA%\Godot\app_userdata\Project Name
@@ -125,8 +132,13 @@ v0.13
 
 
 v0.14
+-removed debug borders on level 1
+-fixed collision shape for slopes on level 3
+-made spike collisions square to match custom data; avoids weird behavior
+
 
 TODO:
+
 
 features:
 -add mute button (music / sfx?)

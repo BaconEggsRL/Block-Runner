@@ -62,7 +62,7 @@ func tween_music():
 		if !tweening:
 			print("start tween")
 			var tween = create_tween()
-			tween.tween_property(bg_music, "volume_db", -80, 3.00)
+			tween.tween_property(bg_music, "volume_db", -80, 2.00)
 			tween.tween_callback(_on_music_tween_completed)
 			tweening = true
 	

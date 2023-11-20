@@ -1,5 +1,6 @@
-Control
+CollisionPolygon2D
 StaticBody2D
+Control
 Node2D
 CollisionShape2D
 AudioStreamPlayer2D
