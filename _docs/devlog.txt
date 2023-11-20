@@ -126,26 +126,30 @@ v0.13
 -fixed bug where crates jitter side to side when pushing them
 -fixed but where force applied to 2 crates seems less than it should be
 -fixed new bug where crates somtimes don't explode when touching spikes (didn't set custom data to 3 for new tiles)
-
+v0.13-2
+-removed debug borders on level 1
+-fixed collision shape for slopes on level 3
+-made spike collisions square to match custom data; avoids weird behavior
 
 ========================================================================================
 
 
 v0.14
--removed debug borders on level 1
--fixed collision shape for slopes on level 3
--made spike collisions square to match custom data; avoids weird behavior
+
 
 
 TODO:
 
 
 features:
--add mute button (music / sfx?)
--velocity boost from gun bullets
--new tiles (water, air)
--new pickups (rotate left, rotate right)
+-zero g, floating box-hop level
 -enemies
 
+-new tiles (water, air)
+-new pickups (rotate left, rotate right)
+
+-velocity boost from gun bullets?
+-add mute button (music / sfx?)
+
 bugs: 
-NONE!
+-sliding into the crate in exactly the right way while airborne you can speed it up to full speed faster
