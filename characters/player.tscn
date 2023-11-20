@@ -24,7 +24,6 @@ safe_margin = 0.1
 script = ExtResource("1_x0n11")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(1.5, 1.5)
 editor_draw_limits = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

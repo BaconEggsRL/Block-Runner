@@ -131,11 +131,13 @@ func _physics_process(delta):
 		var collider = collision.get_collider()
 		if collider.is_in_group("moveable") and collider is RigidBody2D:
 			# apply force to move crates
-			var crate_speed = collider.get_linear_velocity().x
-			if crate_speed < SPEED:
+			var crate_speed = abs(collider.get_linear_velocity().x)
+			if crate_speed < SPEED:  # prevents crate shoot out and helps with jittering
+				# print(crate_speed)
 				var impulse_dir = -1 * collision.get_normal()
 				# no jittering: 450 but can't push 2 crates at all
 				# no jittering on single box push right only: 650
+				# crate gravity seems to impact the force required
 				var impulse_force = 450
 				var impulse = impulse_dir * impulse_force
 				collider.apply_central_force(impulse)
@@ -169,7 +171,6 @@ func _on_terrain_detector_terrain_entered(ter: int):
 
 
 func _on_Game_gravity_changed():
-	print("grav")
 	# update player vars
 	if Game.gravity > 0:
 		$crate_detector.position.y = -32

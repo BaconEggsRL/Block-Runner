@@ -1,12 +1,45 @@
+OTHER BUGS:
+
+#-speedup on top of crates that are moving (feature not bug now)
+#-jumping into a crate seems to provide more collisions and speeds up the crate faster (?)
+#-camera/resolution scaling is not pixel perfect.
+#-weird single pixel layer offset for player ground collisions and crates in fullscreen -- doesn't happen on itch.io
+#-can sometimes cheese the detection zone for NPC dialogue -- not really a big deal
+#-sometimes wallhit sound still does not play (very rare.)
+#-move jump code inside physics, only check for input on unhandled input -- not causing any problems
+
+SOURCE CODE
+#-normalization error randomly occurs in move_and_slide (very rare.)
+<C++ Source>   core/math/vector2.cpp:165 @ slide()
+
 ========================================================================================
 
-General dev notes:
+GENERAL DEV NOTES:
 -actionables are attached to characters in the scene in the editor, since their actions may depend on the scene
 -the export variables allow you to attach dialogue resources and starts to that specific instance/scene
 
 save data:
 user://savegame.bin
 %APPDATA%\Godot\app_userdata\Project Name
+
+========================================================================================
+
+C++ DEBUG NOTES:
+
+command:
+C:\Users\apatt\OneDrive\Desktop\Godot_v4.1.1-stable_win64.exe
+$(TargetPath)
+
+working directory:
+C:\Users\apatt\OneDrive\Desktop\Projects\Block Runner
+$(ProjectDir)
+
+command arguments:
+-e --path "C:\Users\apatt\OneDrive\Desktop\Projects\Block Runner"
+
+scene:
+C:\Users\apatt\OneDrive\Desktop\Projects\Block Runner\scenes\levels\Level_3.tscn
+-e --path "C:\Users\apatt\OneDrive\Desktop\Projects\Block Runner\scenes\levels\Level_3.tscn"
 
 ========================================================================================
 
@@ -73,26 +106,27 @@ v0.12
 - fixed bug where forces applied to crate cause it to lose contact with the ground momentarily, causing it to sometimes rotate unexpectedly. this was caused by issues with tilemap collisions on the borders between tiles.
 This is a documented issue with godot for rigidbodies -- github.com/godotengine/godot/issues/47148
 The solution was to implement a baked collision shape so that the boundaries between tiles are no longer an issue. -- github.com/popcar2/GodotTilemapBaker
-
 - fixed bug where player movement stuttered when moving out from underneath a box near the corners (border of crate_detector).
 I assumed this was caused by the crate_detector changing the physics layers but the issues seems to have resolved itself when fixing the above bug?
-
 - fixed bug where you could get stuck moving across crates on the corners?
 certain gaps between crates cannot be traversed across. player just gets stuck. likely due to requirement of raycast to apply force to crates
 removed raycast check--seems like no adverse effects. can't replicate bug anymore in test level
 Mark as fixed for now? Could also have something to do with crates not being on level ground.
-
 - minor update, saving this version before messing with native source code
+
+v0.13
+-fixed bug where player force applied to crates sometimes causes it to shoot out really fast
+-fixed bug where crates jitter side to side when pushing them
+-fixed but where force applied to 2 crates seems less than it should be
+-fixed new bug where crates somtimes don't explode when touching spikes (didn't set custom data to 3 for new tiles)
 
 
 ========================================================================================
 
 
-v0.13
-
+v0.14
 
 TODO:
-
 
 features:
 -add mute button (music / sfx?)
@@ -101,29 +135,5 @@ features:
 -new pickups (rotate left, rotate right)
 -enemies
 
-
-
-OTHER:
-
-<C++ Source>   core/math/vector2.cpp:165 @ slide()
-
-
-
-#-fix bugs: 
--crates jitter side to side when pushing them
--force applied to 2 crates seems less than it should be
--player force applied to crates sometimes causes it to shoot out really fast
-#-normalization error randomly occurs in move_and_slide (very rare.)
-
-
--speedup on top of crates that are moving
-	I think what is happening here is that when the player pushes the box, it goes about as fast as player speed
-	Then when the player jumps and lands on the platform, if you don't move at all you just slide along at the same speed as the box.
-	So if you try to move it applies the normal speed, plus the box speed, making you move twice as fast.
-	Not sure if this is good behavior or not--will have to think about it
-#-replay value--highscore/alternate routes/unlocks?
-#-camera/resolution scaling is not pixel perfect.
-#-move jump code inside physics, only check for input on unhandled input -- not causing any problems
-#-can sometimes cheese the detection zone for NPC dialogue -- not really a big deal
-#-fix weird single pixel layer offset for player ground collisions and crates in fullscreen -- doesn't happen on itch.io
-#-sometimes wallhit sound still does not play (very rare.)
+bugs: 
+NONE!

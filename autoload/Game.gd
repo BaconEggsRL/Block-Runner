@@ -3,7 +3,7 @@ extends Node
 const SAVE_PATH = "user://savegame.bin"
 
 const DEFAULT_GRAVITY = 980
-const DEFAULT_CRATE_GRAVITY = sign(DEFAULT_GRAVITY) * 9
+const DEFAULT_CRATE_GRAVITY = sign(DEFAULT_GRAVITY) * 500
 const DEFAULT_HAS_GUN: bool = false
 const DEFAULT_START_LEVEL_PATH: String = "res://scenes/levels/Level_1.tscn"
 const DEFAULT_DEATH_COUNTER: int = 0
@@ -35,7 +35,7 @@ signal gravity_changed
 func change_gravity(new_gravity):
 	# update game vars
 	Game.gravity = new_gravity
-	Game.crate_gravity = sign(Game.gravity) * 9
+	Game.crate_gravity = sign(new_gravity) * 500
 	# emit signal
 	gravity_changed.emit()
 	
