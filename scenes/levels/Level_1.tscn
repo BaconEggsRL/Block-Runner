@@ -94,12 +94,6 @@ position = Vector2(201, 367)
 [node name="player" parent="." index="2"]
 position = Vector2(200, 432)
 
-[node name="Control" type="Control" parent="." index="3"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
 [node name="ShootTip" type="Label" parent="Control" index="0"]
 layout_mode = 0
 offset_left = 415.0

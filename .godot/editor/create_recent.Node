@@ -1,3 +1,4 @@
+Control
 StaticBody2D
 Node2D
 CollisionShape2D
@@ -6,7 +7,6 @@ AudioStreamPlayer
 Label
 Sprite2D
 Timer
-Control
 RayCast2D
 ParallaxBackground
 ParallaxLayer
