@@ -105,6 +105,7 @@ if !Game.has_gun and Game.gun_guy_count < Game.NATHAN_MAD_COUNT:
 		Nathan: You'd better take this. You know, to protect yourself.
 		set Game.has_gun = true
 		do Game.has_gun_signal.emit()
+		set Game.gun_guy_count = -1
 		=> END
 
 # You have the gun, or made nathan mad:
@@ -113,11 +114,11 @@ else:
 	
 
 	if Game.gun_guy_count < Game.NATHAN_MAD_COUNT:
-		if Game.gun_guy_count == 0:
+		if Game.gun_guy_count == -1:
 			Nathan: No need to thank me or anything. I'm just doing my part.
 			Nathan: But if you happen to see another rectangle out there who looks kind of like me...
 			Nathan: Please let me know.
-		elif Game.gun_guy_count < (Game.NATHAN_MAD_COUNT / 3 + 1):
+		elif Game.gun_guy_count < (Game.NATHAN_MAD_COUNT / 3):
 			% Nathan: Hello.
 			% Nathan: Good day.
 			% Nathan: How goes it?

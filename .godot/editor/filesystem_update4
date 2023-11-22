@@ -1,8 +1,4 @@
-res://levels/BaseLevel.tscn
-res://effects/crate_explosion.tres
-res://levels/Loading.tscn
-res://characters/player/player.gd
-res://objects/weapons/gun.gd
 res://scenes/Loading.tscn
-res://autoload/Game.gd
+res://effects/crate_explosion.tres
+res://levels/BaseLevel.tscn
 res://levels/Level_1.tscn
