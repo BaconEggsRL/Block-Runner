@@ -146,6 +146,7 @@ v0.15
 
 
 TODO:
+-remove hardcoded scene paths
 
 
 features:

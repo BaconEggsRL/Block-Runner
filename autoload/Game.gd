@@ -99,7 +99,7 @@ func nextLevel():
 	var s = get_tree().current_scene.scene_file_path
 	s = s.replace(".tscn", "")
 	var next_level_int = int(s.right(1)) + 1
-	var next_level = "res://scenes//levels//Level_" + str(next_level_int) + ".tscn"
+	var next_level = "res://levels//Level_" + str(next_level_int) + ".tscn"
 	
 	# play door sound
 	Audio.get_node("door").play()
@@ -111,7 +111,7 @@ func nextLevel():
 		# print("Scene does not exist")
 		# No more levels, you win!
 		Audio.get_node("win").play()
-		get_tree().change_scene_to_file("res://scenes//levels//YouWin.tscn")
+		get_tree().change_scene_to_file("res://levels/YouWin.tscn")
 	
 func resetLevel():
 	Game.gravity = DEFAULT_GRAVITY
