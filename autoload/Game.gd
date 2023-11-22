@@ -1,36 +1,40 @@
 extends Node
 
+const DEFAULT_BG_MUSIC_VOLUME = -15
 const SAVE_PATH = "user://savegame.bin"
+const NATHAN_MAD_COUNT: int = 10
 
 const DEFAULT_GRAVITY = 980
 const DEFAULT_CRATE_GRAVITY = sign(DEFAULT_GRAVITY) * 500
 const DEFAULT_HAS_GUN: bool = false
-const DEFAULT_START_LEVEL_PATH: String = "res://scenes/levels/Level_1.tscn"
+const DEFAULT_START_LEVEL_PATH: String = "res://levels/Level_1.tscn"
 const DEFAULT_DEATH_COUNTER: int = 0
-
 var gravity = DEFAULT_GRAVITY
 var crate_gravity = DEFAULT_CRATE_GRAVITY
 var has_gun = DEFAULT_HAS_GUN
 var start_level_path = DEFAULT_START_LEVEL_PATH
 var death_counter = DEFAULT_DEATH_COUNTER
 
-signal has_gun_signal
 var talked_to_nathan: bool = false
 var beat_the_game: bool = false
 var gun_guy_count: int = 0
 var saw_nocturne: bool = false
 var music_missing: bool = false
 
-const NATHAN_MAD_COUNT: int = 10
-
-const DEFAULT_MUSIC_VOLUME: int = -15
-@onready var bg_music: AudioStreamPlayer = Audio.get_node("bg_music")
-@onready var nocturne: AudioStreamPlayer = Audio.get_node("nocturne")
 var tweening = false
 var restarted = false
 
+signal has_gun_signal
 signal gravity_changed
 
+@onready var bg_music: AudioStreamPlayer = Audio.get_node("bg_music")
+@onready var nocturne: AudioStreamPlayer = Audio.get_node("nocturne")
+
+
+func _ready():
+	loadGame()
+	saveGame()
+	bg_music.volume_db = DEFAULT_BG_MUSIC_VOLUME
 
 func change_gravity(new_gravity):
 	# update game vars
@@ -45,7 +49,7 @@ func _on_music_tween_completed():
 	tweening = false
 	# stop the music -- otherwise it continues to run at silent volume
 	bg_music.stop()
-	bg_music.volume_db = -10 # reset volume
+	bg_music.volume_db = DEFAULT_BG_MUSIC_VOLUME # reset volume
 	# play nocturne
 	if !restarted:
 		nocturne.play()
@@ -57,19 +61,16 @@ func _on_music_tween_completed():
 	
 	
 	
-func tween_music():
+func tween_music(tween_time: float):
 	if !nocturne.playing:
 		if !tweening:
 			print("start tween")
 			var tween = create_tween()
-			tween.tween_property(bg_music, "volume_db", -80, 2.00)
+			tween.tween_property(bg_music, "volume_db", -80, tween_time)
 			tween.tween_callback(_on_music_tween_completed)
 			tweening = true
 	
-func _ready():
-	loadGame()
-	saveGame()
-	bg_music.volume_db = DEFAULT_MUSIC_VOLUME
+
 
 func get_rand() -> float:
 	var rng = RandomNumberGenerator.new()
@@ -84,7 +85,11 @@ func _process(_delta):
 		else:
 			Game.resetLevel()
 
-		
+
+func startGame():
+	get_tree().change_scene_to_file(start_level_path)
+	
+	
 func nextLevel():
 	# reset variables
 	Game.gravity = DEFAULT_GRAVITY
@@ -114,7 +119,7 @@ func resetLevel():
 	if nocturne.playing:
 		nocturne.stop()
 		if Game.saw_nocturne:
-			bg_music.volume_db = DEFAULT_MUSIC_VOLUME
+			bg_music.volume_db = DEFAULT_BG_MUSIC_VOLUME
 			bg_music.play()
 		else:
 			Game.music_missing = true

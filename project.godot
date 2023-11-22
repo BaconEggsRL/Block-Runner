@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Block Runner"
-run/main_scene="res://scenes/levels/Level_1.tscn"
+run/main_scene="res://levels/Loading.tscn"
 config/features=PackedStringArray("4.1", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 Audio="*res://autoload/Audio.tscn"
 Game="*res://autoload/Game.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+ParticlesCache="*res://effects/particles_cache.tscn"
 
 [dialogue_manager]
 

@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 # constants
-const preload_gun = preload("res://scenes/items/gun.tscn")
+const preload_gun = preload("res://scenes/weapons/gun.tscn")
 
 # movement and jump
 const SPEED := 300.0
@@ -90,8 +90,8 @@ func _physics_process(delta):
 	
 	# Check for nocturne
 	if get_tree().get_current_scene().name == "Level_1":
-		if self.global_position.y > 5000:
-			Game.tween_music()
+		if self.global_position.y > 1000:
+			Game.tween_music(5.00)
 
 	# Reset position
 	if self.global_position.y > 900000:

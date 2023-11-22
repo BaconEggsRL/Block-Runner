@@ -1,5 +1,7 @@
 extends ParallaxBackground
 
+const NOCTURNE_START_TIME = 3.00
+
 @onready var player = get_parent().get_node("player")
 @onready var layer1 := $normal_layer
 @onready var layer2 := $flipped_layer
@@ -16,28 +18,37 @@ var red = Color.RED
 # song timestamp, color, interpolation mode to next color
 @onready var event_list := [
 
-	[5.00, red, 0],
-	[11.20, purple, 0],
-	[18.50, red, 0],
+	[NOCTURNE_START_TIME, red, 0],
+	[9.20, purple, 0],
+	[16.50, red, 0],
 	
-	[24.00, purple, 1],
-	[24.20, red, 1],
-	[24.40, purple, 1],
-	[24.60, red, 1],
-	[24.80, purple, 1],
-	[25.00, red, 1],
-	[25.20, purple, 1],
-	[25.40, red, 1],
+	[22.00, purple, 1],
+	[22.20, red, 1],
+	[22.40, purple, 1],
+	[22.60, red, 1],
+	[22.80, purple, 1],
+	[23.00, red, 1],
+	[23.20, purple, 1],
+	[23.40, red, 1],
 	
-	[39.00, purple, 1],
-	[62.00, red, 1],
-	[70.00, Color.WHEAT, 1],
-	[76.00, Color.WHITE, 1],
+	[37.00, purple, 1],
+	[60.00, red, 1],
+	[68.00, Color.WHEAT, 1],
+	[74.00, Color.WHITE, 1],
 	
-	[90.00, near_black, 0],
-	[95.00, red, 0],
+	[88.00, near_black, 0],
+	[93.00, red, 0],
 
-	[102.50, red, 0],
+	[100.50, red, 0],
+	[101.00, purple, 1],
+	[101.20, red, 1],
+	[101.40, purple, 1],
+	[101.60, red, 1],
+	[101.80, purple, 1],
+	[102.00, red, 1],
+	[102.20, purple, 1],
+	[102.40, red, 1],
+	
 	[103.00, purple, 1],
 	[103.20, red, 1],
 	[103.40, purple, 1],
@@ -48,19 +59,10 @@ var red = Color.RED
 	[104.40, red, 1],
 	
 	[105.00, purple, 1],
-	[105.20, red, 1],
-	[105.40, purple, 1],
-	[105.60, red, 1],
-	[105.80, purple, 1],
-	[106.00, red, 1],
-	[106.20, purple, 1],
-	[106.40, red, 1],
+	[113.00, red, 1],
 	
-	[107.00, purple, 1],
-	[115.00, red, 1],
-	
-	[120.00, Color.BLACK, 0],
-	[120.00, Color.BLACK, 0]
+	[118.00, Color.BLACK, 0],
+	[118.00, Color.BLACK, 0]
 ]
 
 # color/interpolation gradient
@@ -120,7 +122,7 @@ func _process(delta):
 			current_color = constant_gradient.sample(key)
 		
 		# set color for start and saw nocturne
-		if current_time >= 5.00:
+		if current_time >= NOCTURNE_START_TIME:
 			if Game.saw_nocturne == false:
 				Game.saw_nocturne = true
 				print("saw_nocturne = true")

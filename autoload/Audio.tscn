@@ -51,6 +51,7 @@ volume_db = 3.0
 
 [node name="nocturne" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_su7ad")
+volume_db = 5.0
 
 [node name="bg_music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_y5xpw")

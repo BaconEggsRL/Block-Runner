@@ -1,13 +1,14 @@
+Timer
+Node2D
+CanvasLayer
+Label
+Control
 CollisionPolygon2D
 StaticBody2D
-Control
-Node2D
 CollisionShape2D
 AudioStreamPlayer2D
 AudioStreamPlayer
-Label
 Sprite2D
-Timer
 RayCast2D
 ParallaxBackground
 ParallaxLayer
@@ -15,7 +16,6 @@ Marker2D
 AnimatedSprite2D
 Area2D
 CenterContainer
-CanvasLayer
 Line2D
 GPUParticles2D
 RigidBody2D

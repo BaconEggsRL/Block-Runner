@@ -131,11 +131,18 @@ v0.13-2
 -fixed collision shape for slopes on level 3
 -made spike collisions square to match custom data; avoids weird behavior
 
+v0.14
+-shortened time for nocturne animation to start
+-reogranized scene tree
+-reduced file size by removing unused assets
+-attempted to fix render compilation by adding an initial loading screen and particle cache autoload
+
 ========================================================================================
 
 
-v0.14
 
+
+v0.15
 
 
 TODO:
@@ -150,6 +157,7 @@ features:
 
 -velocity boost from gun bullets?
 -add mute button (music / sfx?)
+
 
 bugs: 
 -sliding into the crate in exactly the right way while airborne you can speed it up to full speed faster
