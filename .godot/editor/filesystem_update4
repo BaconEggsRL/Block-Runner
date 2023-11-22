@@ -1,9 +1,8 @@
-res://effects/particles_cache.tscn
-res://effects/crate_explosion.tres
-res://assets/theme.tres
 res://levels/BaseLevel.tscn
-res://levels/Level_1.tscn
-res://levels/YouWin.tscn
+res://effects/crate_explosion.tres
 res://levels/Loading.tscn
-res://scenes/destroyables/crate.tscn
+res://characters/player/player.gd
+res://objects/weapons/gun.gd
+res://scenes/Loading.tscn
 res://autoload/Game.gd
+res://levels/Level_1.tscn

@@ -24,10 +24,15 @@ Nathan: I don't mean to pry of course. I'm just worried about your health.
 if Game.gun_guy_count < Game.NATHAN_MAD_COUNT:
 	Nathan: I'm here for you if you want to talk.
 	Nathan: ...
-	Nathan: But only for a little bit.
-	Nathan: Otherwise you might make me depressed too.
-	Nathan: I mean... We are just rectangles, after all. Not the most glamorous existence you could think of.
-	Nathan: There's gotta be more to life than this, right?
+	Nathan: You know, I can't say I haven't thought about jumping off that ledge over there.
+	Nathan: I mean...
+	Nathan: We are just rectangles after all.
+	Nathan: I don't know about you, but I haven't exactly lived the most charmed life.
+	Nathan: Standing around in the same place day after day. It gets pretty old after a while.
+	Nathan: But I'm holding out hope that there's something better waiting for us. Beyond those doors.
+	Nathan: Isn't that why you're here too?
+	Nathan: ...
+	Nathan: Enough of that. I'm sure we've both got better things to do.
 else:
 	Nathan: After all I'm not completely heartless... I think.
 	Nathan: Deep down, I've got a soft spot for rectangles like you.
@@ -69,11 +74,13 @@ else:
 
 ~ met_before
 Nathan: Haven't we met before?
+set Game.gun_guy_count = 0
 => END
 
 
 ~ start
 
+# You don't have the gun, and nathan is not mad:
 if !Game.has_gun and Game.gun_guy_count < Game.NATHAN_MAD_COUNT:
 	
 	if Game.death_counter > 0:
@@ -87,48 +94,47 @@ if !Game.has_gun and Game.gun_guy_count < Game.NATHAN_MAD_COUNT:
 	
 	else:
 		Nathan: Hello there.
-		Nathan: What is your name?
+		Nathan: What's your name?
 		Nathan: ...
 		Nathan: Not much of a talker, are you?
-		Nathan: ...
 		Nathan: I guess it doesn't matter.
 		Nathan: Are you out here all alone?
 		Nathan: ...
 		Nathan: Right then. I'll take that as a yes.
+		Nathan: It can be dangerous out there, beyond those doors.
 		Nathan: You'd better take this. You know, to protect yourself.
 		set Game.has_gun = true
 		do Game.has_gun_signal.emit()
 		=> END
 
+# You have the gun, or made nathan mad:
 else:
 	
+	
+
 	if Game.gun_guy_count < Game.NATHAN_MAD_COUNT:
-		set Game.gun_guy_count += 1
-		if Game.gun_guy_count > 5:
+		if Game.gun_guy_count == 0:
+			Nathan: No need to thank me or anything. I'm just doing my part.
+			Nathan: But if you happen to see another rectangle out there who looks kind of like me...
+			Nathan: Please let me know.
+		elif Game.gun_guy_count < (Game.NATHAN_MAD_COUNT / 3 + 1):
+			% Nathan: Hello.
+			% Nathan: Good day.
+			% Nathan: How goes it?
+			% Nathan: Greetings.
+		elif Game.gun_guy_count < (Game.NATHAN_MAD_COUNT / 3 * 2):
+			% Nathan: What do you want?
+			% Nathan: What is it?
+			% Nathan: Can I help you?
+		else:
 			% Nathan: Scram.
 			% Nathan: Go away.
 			% Nathan: Please stop.
 			% Nathan: You enjoying this?
 			% Nathan: ...
-		else:
-			if Game.gun_guy_count < 3:
-				% Nathan: Hello.
-				% Nathan: Good day.
-			else:
-				% Nathan: What do you want?
-				% Nathan: What is it?
-				% Nathan: Can I help you?
+		set Game.gun_guy_count += 1
 		=> END
-		
-	if Game.gun_guy_count > Game.NATHAN_MAD_COUNT:
-		% Nathan: Bye.
-		% Nathan: Nice try.
-		% Nathan: Buzz off.
-		% Nathan: Skidaddle.
-		% Nathan: Run along now.
 
-		=> END
-	
 	if Game.gun_guy_count == Game.NATHAN_MAD_COUNT:
 		Nathan: Alright punk.
 		Nathan: I see what you're doing here.
@@ -141,8 +147,14 @@ else:
 		set Game.gun_guy_count += 1
 		do Game.saveGame()
 		Nathan: Come back when you've learned yourself some manners.
-		
 		=> END
 
+	if Game.gun_guy_count > Game.NATHAN_MAD_COUNT:
+		% Nathan: Bye.
+		% Nathan: Nice try.
+		% Nathan: Buzz off.
+		% Nathan: Skidaddle.
+		% Nathan: Run along now.
+		=> END
 
 => END

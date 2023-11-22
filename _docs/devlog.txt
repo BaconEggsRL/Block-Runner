@@ -1,5 +1,7 @@
-OTHER BUGS:
+OTHER FEATURES/IMPROVEMENTS:
+#-remove hardcoded scene paths: no--have to use packed scene otherwise in editor which seems more cumbersome. Sticking with Strings for now.
 
+OTHER BUGS:
 #-speedup on top of crates that are moving (feature not bug now)
 #-jumping into a crate seems to provide more collisions and speeds up the crate faster (?)
 #-camera/resolution scaling is not pixel perfect.
@@ -137,6 +139,10 @@ v0.14
 -reduced file size by removing unused assets
 -attempted to fix render compilation by adding an initial loading screen and particle cache autoload
 
+v0.15
+-finished reorganizing scene tree
+-nathan dialogue update, fixed music logic hopefully
+
 ========================================================================================
 
 
@@ -144,9 +150,8 @@ v0.14
 
 v0.15
 
-
 TODO:
--remove hardcoded scene paths
+
 
 
 features:

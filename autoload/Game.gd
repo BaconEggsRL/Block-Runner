@@ -1,81 +1,90 @@
 extends Node
 
-const DEFAULT_BG_MUSIC_VOLUME = -15
-const SAVE_PATH = "user://savegame.bin"
-const NATHAN_MAD_COUNT: int = 10
 
-const DEFAULT_GRAVITY = 980
-const DEFAULT_CRATE_GRAVITY = sign(DEFAULT_GRAVITY) * 500
-const DEFAULT_HAS_GUN: bool = false
-const DEFAULT_START_LEVEL_PATH: String = "res://levels/Level_1.tscn"
-const DEFAULT_DEATH_COUNTER: int = 0
-var gravity = DEFAULT_GRAVITY
-var crate_gravity = DEFAULT_CRATE_GRAVITY
-var has_gun = DEFAULT_HAS_GUN
-var start_level_path = DEFAULT_START_LEVEL_PATH
-var death_counter = DEFAULT_DEATH_COUNTER
+# Node Paths
+const SAVE_PATH: String = "user://savegame.bin"
+const START_LEVEL_PATH: String = "res://levels/Level_1.tscn"
 
-var talked_to_nathan: bool = false
-var beat_the_game: bool = false
-var gun_guy_count: int = 0
+# Preload Nodes
+@onready var bg_music: AudioStreamPlayer = Audio.get_node("bg_music")
+@onready var nocturne: AudioStreamPlayer = Audio.get_node("nocturne")
+
+# Background Music / Nocturne
+const DEFAULT_BG_MUSIC_VOLUME: int = -15
 var saw_nocturne: bool = false
 var music_missing: bool = false
-
 var tweening = false
-var restarted = false
 
+# Dialogue
+# NATHAN_MAD_COUNT needs to be divisible by 3 for dialogue.
+var NATHAN_MAD_COUNT: int = 12
+var talked_to_nathan: bool = false
+var gun_guy_count: int = 0
+
+# Gravity
+const DEFAULT_GRAVITY: int = 980
+const DEFAULT_CRATE_GRAVITY: int = sign(DEFAULT_GRAVITY) * 500
+var gravity := DEFAULT_GRAVITY
+var crate_gravity := DEFAULT_CRATE_GRAVITY
+
+# Game State Variables
+var death_counter: int = 0
+var has_gun: bool = false
+var beat_the_game: bool = false
+
+# Signals
 signal has_gun_signal
 signal gravity_changed
 
-@onready var bg_music: AudioStreamPlayer = Audio.get_node("bg_music")
-@onready var nocturne: AudioStreamPlayer = Audio.get_node("nocturne")
 
 
 func _ready():
 	loadGame()
 	saveGame()
-	bg_music.volume_db = DEFAULT_BG_MUSIC_VOLUME
+	assert(Game.NATHAN_MAD_COUNT % 3 == 0, "NATHAN_MAD_COUNT needs to be divisible by 3 for dialogue.")
+	Game.bg_music.volume_db = Game.DEFAULT_BG_MUSIC_VOLUME
+
 
 func change_gravity(new_gravity):
 	# update game vars
 	Game.gravity = new_gravity
 	Game.crate_gravity = sign(new_gravity) * 500
 	# emit signal
-	gravity_changed.emit()
-	
-	
+	Game.gravity_changed.emit()
+
+
 func _on_music_tween_completed():
 	print("end tween")
-	tweening = false
+	
 	# stop the music -- otherwise it continues to run at silent volume
-	bg_music.stop()
-	bg_music.volume_db = DEFAULT_BG_MUSIC_VOLUME # reset volume
-	# play nocturne
-	if !restarted:
-		nocturne.play()
-	restarted = false
-	if nocturne.playing == false:
-		Game.music_missing = true
-	else:
-		Game.music_missing = false
+	Game.bg_music.stop()
+	Game.bg_music.volume_db = Game.DEFAULT_BG_MUSIC_VOLUME # reset volume
 	
+	# check if restarted during tween
+	if !Game.music_missing:
+		Game.nocturne.play()
 	
-	
+	# no longer tweening, reset logic
+	Game.tweening = false
+
+
 func tween_music(tween_time: float):
-	if !nocturne.playing:
-		if !tweening:
-			print("start tween")
-			var tween = create_tween()
-			tween.tween_property(bg_music, "volume_db", -80, tween_time)
-			tween.tween_callback(_on_music_tween_completed)
-			tweening = true
-	
+	if !Game.nocturne.playing and !Game.tweening:
+		print("start tween")
+		var tween = create_tween()
+		tween.tween_property(bg_music, "volume_db", -80, tween_time)
+		tween.tween_callback(_on_music_tween_completed)
+		# tweening only true once callback created
+		Game.tweening = true
+		# value to reset if restart during tween
+		Game.music_missing = false
 
 
 func get_rand() -> float:
 	var rng = RandomNumberGenerator.new()
 	var num: float = rng.randf()
 	return num
+
 
 func _process(_delta):
 	# restart
@@ -87,9 +96,9 @@ func _process(_delta):
 
 
 func startGame():
-	get_tree().change_scene_to_file(start_level_path)
-	
-	
+	get_tree().change_scene_to_file(START_LEVEL_PATH)
+
+
 func nextLevel():
 	# reset variables
 	Game.gravity = DEFAULT_GRAVITY
@@ -111,30 +120,33 @@ func nextLevel():
 		# print("Scene does not exist")
 		# No more levels, you win!
 		Audio.get_node("win").play()
-		get_tree().change_scene_to_file("res://levels/YouWin.tscn")
-	
+		get_tree().change_scene_to_file("res://scenes/YouWin.tscn")
+
+
 func resetLevel():
 	Game.gravity = DEFAULT_GRAVITY
 	Game.crate_gravity = DEFAULT_CRATE_GRAVITY
 	if nocturne.playing:
 		nocturne.stop()
 		if Game.saw_nocturne:
+			music_missing = false
 			bg_music.volume_db = DEFAULT_BG_MUSIC_VOLUME
 			bg_music.play()
 		else:
-			Game.music_missing = true
-	restarted = true
+			music_missing = true
+	if tweening:
+		music_missing = true
 	get_tree().reload_current_scene()
-	
+
+
 func resetGame():  # beat the game
 	Game.beat_the_game = true
 	Game.gravity = DEFAULT_GRAVITY
 	Game.crate_gravity = DEFAULT_CRATE_GRAVITY
 	# Game.has_gun = DEFAULT_HAS_GUN
-	Game.death_counter = DEFAULT_DEATH_COUNTER
+	Game.death_counter = 0
 	saveGame()
-	get_tree().change_scene_to_file(start_level_path)
-
+	get_tree().change_scene_to_file(START_LEVEL_PATH)
 
 
 func saveGame():
@@ -147,7 +159,8 @@ func saveGame():
 	}
 	var jstr = JSON.stringify(data)
 	file.store_line(jstr)
-	
+
+
 func loadGame():
 	var file = FileAccess.open(SAVE_PATH, FileAccess.READ)
 	if FileAccess.file_exists(SAVE_PATH):

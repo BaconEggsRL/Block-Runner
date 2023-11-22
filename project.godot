@@ -11,16 +11,16 @@ config_version=5
 [application]
 
 config/name="Block Runner"
-run/main_scene="res://levels/Loading.tscn"
+run/main_scene="res://scenes/Loading.tscn"
 config/features=PackedStringArray("4.1", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
+Game="*res://autoload/Game.tscn"
 Audio="*res://autoload/Audio.tscn"
-Game="*res://autoload/Game.gd"
+ParticlesCache="*res://autoload/ParticlesCache.tscn"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
-ParticlesCache="*res://effects/particles_cache.tscn"
 
 [dialogue_manager]
 

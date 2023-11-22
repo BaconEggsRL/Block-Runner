@@ -1,8 +1,8 @@
 [gd_scene load_steps=12 format=3 uid="uid://70l7n3kb6qwp"]
 
-[ext_resource type="PackedScene" uid="uid://daup45jqbof73" path="res://scenes/collectables/gravity_flip.tscn" id="1_tgk2v"]
-[ext_resource type="PackedScene" uid="uid://d1sceydxqxpp5" path="res://levels/BaseLevel.tscn" id="1_wxqsf"]
-[ext_resource type="PackedScene" uid="uid://iy8rl4wh43hy" path="res://scenes/destroyables/crate.tscn" id="2_4i5a2"]
+[ext_resource type="PackedScene" uid="uid://daup45jqbof73" path="res://objects/collectables/gravity_flip.tscn" id="1_tgk2v"]
+[ext_resource type="PackedScene" uid="uid://b7xt5gu18i828" path="res://levels/BaseLevel.tscn" id="1_wxqsf"]
+[ext_resource type="PackedScene" uid="uid://iy8rl4wh43hy" path="res://objects/destroyables/crate.tscn" id="2_4i5a2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pygje"]
 size = Vector2(64, 256)
