@@ -90,6 +90,7 @@ if !Game.has_gun and Game.gun_guy_count < Game.NATHAN_MAD_COUNT:
 		Nathan: You'd better take this then. You know, to protect yourself.
 		set Game.has_gun = true
 		do Game.has_gun_signal.emit()
+		set Game.gun_guy_count = -1
 		=> END
 	
 	else:

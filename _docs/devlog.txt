@@ -148,20 +148,27 @@ v0.15
 
 
 
-v0.15
+v0.16
 
 TODO:
 
 
 
 features:
--zero g, floating box-hop level
--enemies
+-remove barrier to 2nd level set after completing 1st level set (DONE)
+-zero g, floating box-hop level (DONE)
+-velocity boost from gun bullets? (DONE)
+
+
+
+
+
+-enemies (mobs)
 
 -new tiles (water, air)
 -new pickups (rotate left, rotate right)
 
--velocity boost from gun bullets?
+
 -add mute button (music / sfx?)
 
 

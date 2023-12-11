@@ -1,9 +1,12 @@
 extends Node
 
+# keys
+var keys_unlocked = [false]
+signal key_signal
 
 # Node Paths
 const SAVE_PATH: String = "user://savegame.bin"
-const START_LEVEL_PATH: String = "res://levels/Level_1.tscn"
+var START_LEVEL_PATH: String = "res://levels/Level_1.tscn"
 
 # Preload Nodes
 @onready var bg_music: AudioStreamPlayer = Audio.get_node("bg_music")
@@ -22,8 +25,8 @@ var talked_to_nathan: bool = false
 var gun_guy_count: int = 0
 
 # Gravity
-const DEFAULT_GRAVITY: int = 980
-const DEFAULT_CRATE_GRAVITY: int = sign(DEFAULT_GRAVITY) * 500
+var DEFAULT_GRAVITY: int = 980
+var DEFAULT_CRATE_GRAVITY: int = sign(DEFAULT_GRAVITY) * 500
 var gravity := DEFAULT_GRAVITY
 var crate_gravity := DEFAULT_CRATE_GRAVITY
 
@@ -43,6 +46,25 @@ func _ready():
 	saveGame()
 	assert(Game.NATHAN_MAD_COUNT % 3 == 0, "NATHAN_MAD_COUNT needs to be divisible by 3 for dialogue.")
 	Game.bg_music.volume_db = Game.DEFAULT_BG_MUSIC_VOLUME
+
+
+func _process(_delta):
+	# restart
+	if Input.is_action_just_pressed("restart"):
+		if get_tree().current_scene.name == "YouWin":
+			Game.resetGame()
+		else:
+			Game.resetLevel()
+
+
+func startGame():
+	# Game.DEFAULT_CRATE_GRAVITY = 2
+	# Game.crate_gravity = DEFAULT_CRATE_GRAVITY
+	# START_LEVEL_PATH = "res://levels/Level_5.tscn"
+	
+	# Game.has_gun = true
+	# has_gun_signal.emit()
+	get_tree().change_scene_to_file(START_LEVEL_PATH)
 
 
 func change_gravity(new_gravity):
@@ -86,33 +108,38 @@ func get_rand() -> float:
 	return num
 
 
-func _process(_delta):
-	# restart
-	if Input.is_action_just_pressed("restart"):
-		if get_tree().current_scene.name == "YouWin":
-			Game.resetGame()
-		else:
-			Game.resetLevel()
-
-
-func startGame():
-	get_tree().change_scene_to_file(START_LEVEL_PATH)
-
-
-func nextLevel():
+func keyUnlock(key_unlock_number):
+	Audio.get_node("key").play()
+	# door remove code
+	if key_unlock_number > keys_unlocked.size():
+		print("key value is larger than array size")
+	match key_unlock_number:
+		-1:
+			print("key value is -1")
+		0:
+			print("unlock key 0")
+			keys_unlocked[0] = true
+			key_signal.emit(0)
+	
+	
+	
+func nextLevel(door_level_number, door_crate_gravity):
 	# reset variables
 	Game.gravity = DEFAULT_GRAVITY
-	Game.crate_gravity = DEFAULT_CRATE_GRAVITY
+	if door_crate_gravity == -1:
+		Game.DEFAULT_CRATE_GRAVITY = 500
+	else:
+		Game.DEFAULT_CRATE_GRAVITY = door_crate_gravity
+	Game.crate_gravity = Game.DEFAULT_CRATE_GRAVITY
 	
 	# get path to next level
 	var s = get_tree().current_scene.scene_file_path
 	s = s.replace(".tscn", "")
-	var next_level_int = int(s.right(1)) + 1
+	var next_level_int = door_level_number
 	var next_level = "res://levels//Level_" + str(next_level_int) + ".tscn"
 	
 	# play door sound
 	Audio.get_node("door").play()
-
 	# go to next level
 	if ResourceLoader.exists(next_level):
 		get_tree().change_scene_to_file(next_level)
@@ -167,7 +194,7 @@ func loadGame():
 		if not file.eof_reached():
 			var current_line = JSON.parse_string(file.get_line())
 			if current_line: # returns null if parsing failed
-				Game.has_gun = current_line["has_gun"]
+				# Game.has_gun = current_line["has_gun"]
 				Game.talked_to_nathan = current_line["talked_to_nathan"]
 				Game.beat_the_game = current_line["beat_the_game"]
 				Game.gun_guy_count = current_line["gun_guy_count"]

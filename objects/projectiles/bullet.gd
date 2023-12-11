@@ -1,6 +1,8 @@
 class_name Bullet extends Node2D
 
-const SPEED = 700.0
+const PSPEEDX := 400.0
+const PSPEEDY := 250.0
+const SPEED := 700.0
 var direction = Vector2.ZERO
 var velocity = Vector2.ZERO
 

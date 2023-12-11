@@ -72,6 +72,7 @@ shape = SubResource("RectangleShape2D_bpfxe")
 
 [node name="door" parent="environment" index="1"]
 position = Vector2(614, 288)
+door_level_number = 4
 
 [node name="gravity_flip" parent="environment/collectables" index="0" instance=ExtResource("1_tgk2v")]
 position = Vector2(891, 1101)

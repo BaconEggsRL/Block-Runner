@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://characters/player/player.gd" id="1_x0n11"]
 [ext_resource type="PackedScene" uid="uid://bwg2hqd66desv" path="res://helpers/terrain_detector.tscn" id="2_qq8oy"]
-[ext_resource type="Texture2D" uid="uid://dg2c8g3sdnq58" path="res://assets/art/sprites/player.png" id="3_s3o74"]
+[ext_resource type="Texture2D" uid="uid://dg2c8g3sdnq58" path="res://characters/player/player.png" id="3_s3o74"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f24bi"]
 size = Vector2(14, 5.18473)

@@ -17,6 +17,9 @@ func createBullet():
 	bullet.global_position = $Marker2D.global_position
 	bullet.direction = (get_global_mouse_position() - self.global_position).normalized()
 	bullet.velocity = bullet.direction * bullet.SPEED
+	# add opposing velocity to player
+	self.get_parent().velocity.x = -1 * bullet.direction.x * bullet.PSPEEDX
+	self.get_parent().velocity.y = -1 * bullet.direction.y * bullet.PSPEEDY
 	Audio.get_node("shoot").play()
 	
 func shoot():

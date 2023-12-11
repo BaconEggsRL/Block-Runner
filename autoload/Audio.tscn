@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://bgqo3bukh15ye"]
+[gd_scene load_steps=14 format=3 uid="uid://bgqo3bukh15ye"]
 
 [ext_resource type="AudioStream" uid="uid://buferipqe3nrd" path="res://assets/sound/fx/ploop.wav" id="1_m08hi"]
 [ext_resource type="AudioStream" uid="uid://c1i50pvs1usik" path="res://assets/sound/fx/kchee.wav" id="2_o7hjm"]
 [ext_resource type="AudioStream" uid="uid://hwb3s8svjrpx" path="res://assets/sound/fx/beeero.wav" id="3_6mnqp"]
+[ext_resource type="AudioStream" uid="uid://b1usfpunw7u5d" path="res://assets/sound/fx/kaching.wav" id="5_awkgm"]
 [ext_resource type="AudioStream" uid="uid://wfkx00mwgpfg" path="res://assets/sound/fx/pllllp.wav" id="5_bfrj7"]
 [ext_resource type="AudioStream" uid="uid://comg0fh4xsmck" path="res://assets/sound/fx/explode.wav" id="5_td40o"]
 [ext_resource type="AudioStream" uid="uid://c8ydffgmne6u2" path="res://assets/sound/fx/baaagh.wav" id="6_7241v"]
@@ -27,6 +28,10 @@ stream = ExtResource("3_6mnqp")
 
 [node name="door" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_7241v")
+volume_db = 3.0
+
+[node name="key" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_awkgm")
 volume_db = 3.0
 
 [node name="explode" type="AudioStreamPlayer2D" parent="."]

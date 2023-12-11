@@ -3,7 +3,6 @@ extends RigidBody2D
 @export var explosion_effect: PackedScene
 var exploded = false
 
-@onready var player: CharacterBody2D = get_node("../../../player")
 @onready var terrain = $terrain_detector
 @onready var gravity = Game.crate_gravity
 

@@ -108,7 +108,7 @@ func _physics_process(delta):
 				else:
 					actionable_finder.scale = Vector2(-1,-1)
 			else:
-				velocity.x = move_toward(velocity.x, 0, SPEED)
+				velocity.x = move_toward(velocity.x, 0, SPEED/4)
 		1: # REVERSE
 			velocity.x = -1 * SPEED
 			# velocity.x = move_toward(velocity.x, -1*SPEED, SPEED)
@@ -139,8 +139,9 @@ func _physics_process(delta):
 				# no jittering on single box push right only: 650
 				# crate gravity seems to impact the force required
 				var impulse_force = 450
+				# var impulse_force = 900
 				var impulse = impulse_dir * impulse_force
-				collider.apply_central_force(impulse)
+				collider.apply_force(impulse)
 	
 	# play sound for falls
 	if !was_on_floor and is_on_floor():
@@ -182,8 +183,11 @@ func _on_Game_gravity_changed():
 	up_cast.target_position = -1 * up_cast.target_position
 	down_cast.target_position = -1 * down_cast.target_position
 	
-func _on_door_body_entered(_body):
-	Game.nextLevel()
+func _on_door_body_entered(_body, door_level_number, door_crate_gravity):
+	Game.nextLevel(door_level_number, door_crate_gravity)
+	
+func _on_key_body_entered(_body, key_unlock_number):
+	Game.keyUnlock(key_unlock_number)
 
 func _on_crate_detector_body_shape_entered(_body_rid, body, _body_shape_index, _local_shape_index):
 	if body is RigidBody2D:
