@@ -1,10 +1,12 @@
-StaticBody2D
-Area2D
+RigidBody2D
+AnimatableBody2D
+Timer
 CollisionShape2D
 Sprite2D
+StaticBody2D
+Area2D
 Node2D
 AudioStreamPlayer2D
-Timer
 CanvasLayer
 Label
 Control
@@ -18,7 +20,6 @@ AnimatedSprite2D
 CenterContainer
 Line2D
 GPUParticles2D
-RigidBody2D
 WorldEnvironment
 TileMap
 Camera2D

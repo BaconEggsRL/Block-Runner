@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b4yg8a7yv2duc"]
+[gd_scene load_steps=19 format=3 uid="uid://b4yg8a7yv2duc"]
 
 [ext_resource type="PackedScene" uid="uid://jbvqjowbie6m" path="res://characters/NPCs/gun_guy/gun_guy.tscn" id="1_lrsf2"]
 [ext_resource type="PackedScene" uid="uid://b7xt5gu18i828" path="res://levels/BaseLevel.tscn" id="1_wxqsf"]
@@ -9,6 +9,7 @@
 [ext_resource type="Resource" uid="uid://dj2n8ibaem6de" path="res://dialogue/main.dialogue" id="3_ig2el"]
 [ext_resource type="PackedScene" uid="uid://iy8rl4wh43hy" path="res://objects/destroyables/crate.tscn" id="4_onvsy"]
 [ext_resource type="Script" path="res://helpers/ShootTip.gd" id="5_a5fmv"]
+[ext_resource type="PackedScene" uid="uid://gadble8ckvtx" path="res://characters/mobs/goomba/goomba.tscn" id="9_c84vf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xihqs"]
 size = Vector2(1168, 64)
@@ -101,6 +102,9 @@ shape = SubResource("RectangleShape2D_gqra4")
 
 [node name="crate" parent="environment/destroyables" index="0" instance=ExtResource("4_onvsy")]
 position = Vector2(198, 377)
+
+[node name="goomba" parent="environment/destroyables" index="1" instance=ExtResource("9_c84vf")]
+position = Vector2(619, 438)
 
 [node name="player" parent="." index="2"]
 position = Vector2(199, 440)

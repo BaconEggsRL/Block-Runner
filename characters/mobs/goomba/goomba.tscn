@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://gadble8ckvtx"]
+
+[ext_resource type="Texture2D" uid="uid://brjqn6r17n0fq" path="res://characters/mobs/goomba/goomba.png" id="1_gw608"]
+[ext_resource type="Script" path="res://characters/mobs/goomba/goomba.gd" id="1_lrejm"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_i80l3"]
+friction = 0.0
+absorbent = true
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fw2ai"]
+size = Vector2(32, 32)
+
+[node name="goomba" type="RigidBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_i80l3")
+gravity_scale = 12.0
+can_sleep = false
+lock_rotation = true
+script = ExtResource("1_lrejm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+texture = ExtResource("1_gw608")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_fw2ai")
+
+[node name="BehaviorTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="BehaviorTimer" to="." method="_on_behavior_timer_timeout"]

@@ -143,33 +143,28 @@ v0.15
 -finished reorganizing scene tree
 -nathan dialogue update, fixed music logic hopefully
 
-========================================================================================
-
-
-
-
 v0.16
-
-TODO:
-
-
-
-features:
 -remove barrier to 2nd level set after completing 1st level set (DONE)
 -zero g, floating box-hop level (DONE)
 -velocity boost from gun bullets? (DONE)
 
+========================================================================================
 
 
+v0.17
 
+TODO:
 
+features:
 -enemies (mobs)
+want to goomba stomp some fools (for now... immune)
 
+
+
+
+-new puzzle pickups (rotate left, rotate right)
 -new tiles (water, air)
--new pickups (rotate left, rotate right)
-
-
--add mute button (music / sfx?)
+-add mute button, menu (music / sfx?)
 
 
 bugs: 

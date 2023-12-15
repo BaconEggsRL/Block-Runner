@@ -1,16 +1,2 @@
-res://levels/Level_1.tscn
+res://characters/mobs/goomba/goomba.tscn
 res://effects/crate_explosion.tres
-res://scenes/Loading.tscn
-res://objects/destroyables/crate.tscn
-res://autoload/Audio.tscn
-res://levels/Level_0.tscn
-res://characters/player/player.tscn
-res://levels/Level_5.tscn
-res://levels/Level_4.tscn
-res://objects/collectables/key.tscn
-res://objects/collectables/door.tscn
-res://autoload/Game.gd
-res://levels/Level_11.tscn
-res://levels/Level_2.tscn
-res://levels/Level_3.tscn
-res://helpers/environment.gd

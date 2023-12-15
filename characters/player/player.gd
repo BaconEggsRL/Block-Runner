@@ -108,7 +108,8 @@ func _physics_process(delta):
 				else:
 					actionable_finder.scale = Vector2(-1,-1)
 			else:
-				velocity.x = move_toward(velocity.x, 0, SPEED/4)
+				pass
+				velocity.x = move_toward(velocity.x, 0, SPEED)
 		1: # REVERSE
 			velocity.x = -1 * SPEED
 			# velocity.x = move_toward(velocity.x, -1*SPEED, SPEED)
@@ -129,7 +130,7 @@ func _physics_process(delta):
 	for i in get_slide_collision_count(): 	# detect crates and other rigid bodies for moving
 		var collision = get_slide_collision(i)
 		var collider = collision.get_collider()
-		if collider.is_in_group("moveable") and collider is RigidBody2D:
+		if collider.is_in_group("crate"):
 			# apply force to move crates
 			var crate_speed = abs(collider.get_linear_velocity().x)
 			if crate_speed < SPEED:  # prevents crate shoot out and helps with jittering
